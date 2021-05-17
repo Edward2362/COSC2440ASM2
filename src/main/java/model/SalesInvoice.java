@@ -1,38 +1,35 @@
 package model;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
-@Table(name = "inventoryDeliveryNote")
-public class InventoryDeliveryNote extends Note {
+@Table(name = "salesInvoice")
+public class SalesInvoice extends Note {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @JoinColumn
+    private Customer customer;
 
-    public InventoryDeliveryNote() {
-    }
+    public SalesInvoice(){};
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    @Override
-    public Date getDate() {
-        return super.getDate();
+    public Customer getCustomer() {
+        return customer;
     }
 
-    @Override
-    public void setDate(Date date) {
-        super.setDate(date);
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
-
     @Override
     public Staff getStaff() {
         return super.getStaff();
