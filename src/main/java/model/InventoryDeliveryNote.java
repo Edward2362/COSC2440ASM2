@@ -1,4 +1,4 @@
 package model;
 
-public class InventoryDeliveryNote extends InventoryNote{
+public class InventoryDeliveryNote extends Note {
 }
