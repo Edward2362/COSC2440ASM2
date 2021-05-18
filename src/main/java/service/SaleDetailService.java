@@ -1,6 +1,6 @@
 package service;
 
-import model.Staff;
+import model.SaleDetail;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,16 +9,12 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Transactional
-public class StaffService {
-
-
+public class SaleDetailService {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void setSessionFactory(SessionFactory sessionFactory){this.sessionFactory=sessionFactory;}
-
-    public List<Staff> getAllStaffs(){
-        Criteria criteria= sessionFactory.getCurrentSession().createCriteria(Staff.class);
+    public List<SaleDetail> getAllSaleDetails(){
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(SaleDetail.class);
         return criteria.list();
     }
 }

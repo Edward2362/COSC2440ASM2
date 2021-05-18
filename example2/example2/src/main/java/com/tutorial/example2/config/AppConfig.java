@@ -1,24 +1,44 @@
-package config;
+package com.tutorial.example2.config;
 
-import model.Staff;
+import java.util.Properties;
+
 import org.hibernate.SessionFactory;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import java.util.Properties;
+import com.tutorial.example2.entity.Course;
+import com.tutorial.example2.entity.Student;
+import com.tutorial.example2.service.CourseService;
+import com.tutorial.example2.service.StudentService;
 
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
+
 @Configuration
 @EnableTransactionManagement
-@EnableWebMvc
 public class AppConfig {
+
+	@Bean
+    public Student student(){
+        return new Student();
+    }
+	
+	@Bean
+    public Course course(){
+        return new Course();
+    }
+	
+    @Bean
+    public StudentService studentService(){
+        return new StudentService();
+    }
+    
+    @Bean
+    public CourseService courseService(){
+        return new CourseService();
+    }
 
     @Bean
     public LocalSessionFactoryBean sessionFactory(){
@@ -26,29 +46,33 @@ public class AppConfig {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         properties.put("hibernate.show_sql", true);
-        properties.put("hibernate.hbm2ddl.auto", "update");
-
-        LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
-
-        sessionFactoryBean.setPackagesToScan("com.example.practice2.model");
+        properties.put("hibernate.hbm2ddl.auto", "create-drop");
 
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
+
+        //To use postgresql
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/COSC2440");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/demo");
         dataSource.setUsername("postgres");
-        dataSource.setPassword("NVQ_2000");
+        dataSource.setPassword("thanhminh");
 
+
+        LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource);
-        sessionFactoryBean.setHibernateProperties(properties);
 
-        return sessionFactoryBean;
+        sessionFactoryBean.setHibernateProperties(properties);
+        sessionFactoryBean.setPackagesToScan("com.tutorial.example2.entity");
+
+
+        return  sessionFactoryBean;
     }
+
 
     @Bean
     public HibernateTransactionManager transactionManager(SessionFactory sessionFactory){
         HibernateTransactionManager tx = new HibernateTransactionManager(sessionFactory);
-
         return tx;
     }
+
 
 }
