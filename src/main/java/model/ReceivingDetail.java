@@ -1,5 +1,11 @@
 package model;
 
+
+
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,6 +16,10 @@ public class ReceivingDetail extends NoteDetail{
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name="product_id", nullable = false)
+    private Product product;
 
     public ReceivingDetail() {
     }
@@ -41,4 +51,5 @@ public class ReceivingDetail extends NoteDetail{
     public void setQuantity(int quantity) {
         super.setQuantity(quantity);
     }
+
 }

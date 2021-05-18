@@ -1,6 +1,6 @@
 package model;
 
-
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -22,6 +22,18 @@ public class Staff {
 
     @Column
     private String email;
+  
+    @OneToMany(mappedBy = "staff", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<DeliveryDetail> deliveryDetailId;
+
+    @OneToMany(mappedBy = "staff", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<InventoryReceiveNote> inventoryReceiveNoteId;
+
+    @OneToMany(mappedBy = "staff", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Order> orderId;
+
+    @OneToMany(mappedBy = "staff", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<SaleInvoice> saleInvoiceId;
 
     public Staff(){};
 
@@ -64,5 +76,4 @@ public class Staff {
     public void setEmail(String email) {
         this.email = email;
     }
-
 }

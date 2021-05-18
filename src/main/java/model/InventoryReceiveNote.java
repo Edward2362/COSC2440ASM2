@@ -1,6 +1,8 @@
 package model;
 
-
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,6 +13,10 @@ public class InventoryReceiveNote extends Note{
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name="staff_id", nullable = false)
+    private Staff staff;
 
 
     public InventoryReceiveNote(){};
@@ -42,5 +48,4 @@ public class InventoryReceiveNote extends Note{
     public void setStaff(Staff staff) {
         super.setStaff(staff);
     }
-
 }

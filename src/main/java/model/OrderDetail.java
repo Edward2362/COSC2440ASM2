@@ -1,5 +1,9 @@
 package model;
 
+
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.*;
 import javax.xml.crypto.Data;
 
@@ -12,6 +16,11 @@ public class OrderDetail extends NoteDetail{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+  
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name="product_id", nullable = false)
+    private Product product;
+  
     @Column
     private int price;
 

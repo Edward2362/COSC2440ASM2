@@ -1,6 +1,11 @@
 package model;
 
+
 import javax.persistence.*;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 
 @Entity
 @Table(name = "saleDetail")
@@ -15,6 +20,10 @@ public class SaleDetail extends NoteDetail{
 
     @Column
     private long totalValue;
+  
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name="product_id", nullable = false)
+    private Product product;
 
     public SaleDetail() {
     }
