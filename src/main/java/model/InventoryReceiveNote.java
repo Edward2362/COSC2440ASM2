@@ -1,5 +1,6 @@
 package model;
 
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -41,4 +42,5 @@ public class InventoryReceiveNote extends Note{
     public void setStaff(Staff staff) {
         super.setStaff(staff);
     }
+
 }

@@ -1,5 +1,6 @@
 package model;
 
+
 import javax.persistence.*;
 
 @Entity
@@ -63,4 +64,5 @@ public class Staff {
     public void setEmail(String email) {
         this.email = email;
     }
+
 }

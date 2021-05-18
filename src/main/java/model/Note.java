@@ -27,4 +27,4 @@ public abstract class Note {
     public void setStaff(Staff staff) {
         this.staff = staff;
     }
-}
+
