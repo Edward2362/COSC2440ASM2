@@ -1,7 +1,6 @@
 package service;
 
-import model.SalesInvoice;
-import model.Staff;
+import model.SaleInvoice;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +16,8 @@ public class SalesInvoiceService {
 
     public void setSessionFactory(SessionFactory sessionFactory){this.sessionFactory=sessionFactory;}
 
-    public List<SalesInvoice> getAllSalesInvoices(){
-        Criteria criteria= sessionFactory.getCurrentSession().createCriteria(SalesInvoice.class);
+    public List<SaleInvoice> getAllSalesInvoices(){
+        Criteria criteria= sessionFactory.getCurrentSession().createCriteria(SaleInvoice.class);
         return criteria.list();
     }
 }

@@ -20,10 +20,10 @@ public class SaleDetail extends NoteDetail{
 
     @Column
     private long totalValue;
-  
-    @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="product_id", nullable = false)
-    private Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "sale_invoice_id", nullable = false)
+    private SaleInvoice saleInvoiceID;
 
     public SaleDetail() {
     }
@@ -50,6 +50,14 @@ public class SaleDetail extends NoteDetail{
 
     public void setTotalValue(long totalValue) {
         this.totalValue = totalValue;
+    }
+
+    public SaleInvoice getSaleInvoiceID() {
+        return saleInvoiceID;
+    }
+
+    public void setSaleInvoiceID(SaleInvoice saleInvoiceID) {
+        this.saleInvoiceID = saleInvoiceID;
     }
 
     @Override

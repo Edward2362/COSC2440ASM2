@@ -1,18 +1,68 @@
 package model;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Entity
-public class SaleInvoice {
-    @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="staff_id", nullable = false)
-    private Staff staff;
+@Table(name = "salesInvoice")
+public class SaleInvoice extends Note {
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="customer_id", nullable = false)
-    private Customer customer;
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customerID;
 
+    @OneToMany(mappedBy = "saleInvoiceID", cascade = CascadeType.ALL, fetch =
+            FetchType.EAGER)
+    private List<SaleDetail> saleDetailList;
+
+    public SaleInvoice(){};
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Customer getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(Customer customer) {
+        this.customerID = customer;
+    }
+
+    public List<SaleDetail> getSaleDetailList() {
+        return saleDetailList;
+    }
+
+    public void setSaleDetailList(List<SaleDetail> saleDetailList) {
+        this.saleDetailList = saleDetailList;
+    }
+
+    @Override
+    public Date getDate() {
+        return super.getDate();
+    }
+
+    @Override
+    public void setDate(Date date) {
+        super.setDate(date);
+    }
+
+    @Override
+    public Staff getStaffID() {
+        return super.getStaffID();
+    }
+
+    @Override
+    public void setStaffID(Staff staff) {
+        super.setStaffID(staff);
+    }
 }

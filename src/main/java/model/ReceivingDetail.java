@@ -17,9 +17,9 @@ public class ReceivingDetail extends NoteDetail{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="product_id", nullable = false)
-    private Product product;
+    @ManyToOne
+    @JoinColumn(name = "inventory_receive_note_id", nullable = false)
+    private InventoryReceiveNote inventoryReceiveNoteID;
 
     public ReceivingDetail() {
     }
@@ -30,6 +30,14 @@ public class ReceivingDetail extends NoteDetail{
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public InventoryReceiveNote getInventoryReceiveNoteID() {
+        return inventoryReceiveNoteID;
+    }
+
+    public void setInventoryReceiveNoteID(InventoryReceiveNote inventoryReceiveNoteID) {
+        this.inventoryReceiveNoteID = inventoryReceiveNoteID;
     }
 
     @Override

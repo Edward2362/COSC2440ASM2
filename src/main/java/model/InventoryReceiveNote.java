@@ -1,32 +1,38 @@
 package model;
 
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name = "inventoryReciveNote")
+@Table(name = "inventoryReceiveNote")
 public class InventoryReceiveNote extends Note{
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    
-    @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="staff_id", nullable = false)
-    private Staff staff;
+    private int id;
 
+    @OneToMany(mappedBy = "inventoryReceiveNoteID", cascade = CascadeType.ALL, fetch =
+            FetchType.EAGER)
+    private List<ReceivingDetail> receivingDetailList;
 
     public InventoryReceiveNote(){};
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public List<ReceivingDetail> getReceivingDetailList() {
+        return receivingDetailList;
+    }
+
+    public void setReceivingDetailList(List<ReceivingDetail> receivingDetailList) {
+        this.receivingDetailList = receivingDetailList;
     }
 
     @Override
@@ -40,12 +46,12 @@ public class InventoryReceiveNote extends Note{
     }
 
     @Override
-    public Staff getStaff() {
-        return super.getStaff();
+    public Staff getStaffID() {
+        return super.getStaffID();
     }
 
     @Override
-    public void setStaff(Staff staff) {
-        super.setStaff(staff);
+    public void setStaffID(Staff staff) {
+        super.setStaffID(staff);
     }
 }

@@ -7,40 +7,26 @@ import javax.persistence.ManyToOne;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "order")
-public class Order {
+public class Order extends Note{
 
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
-    private Date date;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "staffID", nullable = false)
-    private Staff staffID;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "providerID", nullable = false)
     private Provider providerID;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "DetailID", nullable = false)
-    private OrderDetail orderDetailID;
+    @OneToMany(mappedBy = "orderID", cascade = CascadeType.ALL, fetch =
+            FetchType.EAGER)
+    private List<OrderDetail> orderDetailList;
 
     public Order() {
-    }
-
-    public Order(int id, Date date, Staff staffID, Provider providerID, OrderDetail orderDetailID) {
-        this.id = id;
-        this.date = date;
-        this.staffID = staffID;
-        this.providerID = providerID;
-        this.orderDetailID = orderDetailID;
     }
 
     public int getId() {
@@ -51,22 +37,6 @@ public class Order {
         this.id = id;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Staff getStaffID() {
-        return staffID;
-    }
-
-    public void setStaffID(Staff staffID) {
-        this.staffID = staffID;
-    }
-
     public Provider getProviderID() {
         return providerID;
     }
@@ -75,11 +45,31 @@ public class Order {
         this.providerID = providerID;
     }
 
-    public OrderDetail getOrderDetailID() {
-        return orderDetailID;
+    public List<OrderDetail> getOrderDetailList() {
+        return orderDetailList;
     }
 
-    public void setOrderDetailID(OrderDetail orderDetailID) {
-        this.orderDetailID = orderDetailID;
+    public void setOrderDetailList(List<OrderDetail> orderDetailList) {
+        this.orderDetailList = orderDetailList;
+    }
+
+    @Override
+    public Date getDate() {
+        return super.getDate();
+    }
+
+    @Override
+    public void setDate(Date date) {
+        super.setDate(date);
+    }
+
+    @Override
+    public Staff getStaffID() {
+        return super.getStaffID();
+    }
+
+    @Override
+    public void setStaffID(Staff staff) {
+        super.setStaffID(staff);
     }
 }

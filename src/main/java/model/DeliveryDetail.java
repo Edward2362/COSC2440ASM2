@@ -15,14 +15,10 @@ public class DeliveryDetail extends NoteDetail{
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-  
-    @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="product_id", nullable = false)
-    private Product product;
 
-    @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="staff_id", nullable = false)
-    private Staff staff;
+    @ManyToOne
+    @JoinColumn(name = "inventory_delivery_note_id", nullable = false)
+    private InventoryDeliveryNote inventoryDeliveryNoteID;
 
     public DeliveryDetail() {
     }
@@ -33,6 +29,14 @@ public class DeliveryDetail extends NoteDetail{
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public InventoryDeliveryNote getInventoryDeliveryNoteID() {
+        return inventoryDeliveryNoteID;
+    }
+
+    public void setInventoryDeliveryNoteID(InventoryDeliveryNote inventoryDeliveryNoteID) {
+        this.inventoryDeliveryNoteID = inventoryDeliveryNoteID;
     }
 
     @Override

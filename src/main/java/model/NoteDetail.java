@@ -1,14 +1,13 @@
 package model;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 @MappedSuperclass
 public abstract class NoteDetail {
 
-    @JoinColumn
-    protected Product productID;
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name="product_id", nullable = false)
+    private Product productID;
 
     @Column
     protected int quantity;

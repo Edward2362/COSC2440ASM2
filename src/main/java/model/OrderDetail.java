@@ -15,13 +15,14 @@ public class OrderDetail extends NoteDetail{
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
-    @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="product_id", nullable = false)
-    private Product product;
   
     @Column
     private int price;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id", nullable = false)
+    private Order orderID;
+
 
     public OrderDetail() {
     }
@@ -40,6 +41,14 @@ public class OrderDetail extends NoteDetail{
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public Order getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(Order orderID) {
+        this.orderID = orderID;
     }
 
     @Override

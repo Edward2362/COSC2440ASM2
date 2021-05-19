@@ -10,7 +10,7 @@ public abstract class Note {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "staffId", nullable = false)
-    private Staff staff;
+    private Staff staffID;
 
     public Date getDate() {
         return date;
@@ -20,11 +20,12 @@ public abstract class Note {
         this.date = date;
     }
 
-    public Staff getStaff() {
-        return staff;
+    public Staff getStaffID() {
+        return staffID;
     }
 
-    public void setStaff(Staff staff) {
-        this.staff = staff;
+    public void setStaffID(Staff staff) {
+        this.staffID = staff;
     }
+}
 

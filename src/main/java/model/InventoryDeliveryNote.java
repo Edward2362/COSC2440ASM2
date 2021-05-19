@@ -3,6 +3,7 @@ package model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "inventoryDeliveryNote")
@@ -12,15 +13,27 @@ public class InventoryDeliveryNote extends Note {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @OneToMany(mappedBy = "inventoryDeliveryNoteID", cascade = CascadeType.ALL, fetch =
+            FetchType.EAGER)
+    private List<DeliveryDetail> deliveryDetailList;
+
     public InventoryDeliveryNote() {
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public List<DeliveryDetail> getDeliveryDetailList() {
+        return deliveryDetailList;
+    }
+
+    public void setDeliveryDetailList(List<DeliveryDetail> deliveryDetailList) {
+        this.deliveryDetailList = deliveryDetailList;
     }
 
     @Override
@@ -34,13 +47,12 @@ public class InventoryDeliveryNote extends Note {
     }
 
     @Override
-    public Staff getStaff() {
-        return super.getStaff();
+    public Staff getStaffID() {
+        return super.getStaffID();
     }
 
     @Override
-    public void setStaff(Staff staff) {
-        super.setStaff(staff);
+    public void setStaffID(Staff staff) {
+        super.setStaffID(staff);
     }
-
 }
