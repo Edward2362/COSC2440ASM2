@@ -30,17 +30,17 @@ public class Product {
     @JoinColumn(name = "category_id", nullable = false)
     private Category categoryId;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<OrderDetail> orderDetailId;
-
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<DeliveryDetail> deliveryDetailsId;
-
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<SaleDetail> saleDetailId;
-
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<ReceivingDetail> receivingDetailId;
+//    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<OrderDetail> orderDetailId;
+//
+//    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<DeliveryDetail> deliveryDetailsId;
+//
+//    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<SaleDetail> saleDetailId;
+//
+//    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<ReceivingDetail> receivingDetailId;
 
     @Column
     private float price;

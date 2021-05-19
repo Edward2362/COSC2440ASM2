@@ -2,14 +2,14 @@ package model;
 
 import javax.persistence.*;
 
-@Entity
+@MappedSuperclass
 public class AbstractForCP {
-    @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
 
     @Column
     private String name;
+
+    @Column
+    private String address;
 
     @Column
     private String phone;
@@ -20,8 +20,6 @@ public class AbstractForCP {
     @Column
     private String fax;
 
-    // TODO
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name="contact")
-//    private AbstractForCP contactPerson;
+    @Column
+    private String contactPerson;
 }

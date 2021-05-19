@@ -15,8 +15,7 @@ public class OrderDetail extends NoteDetail{
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-  
+    
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name="product_id", nullable = false)
     private Product product;

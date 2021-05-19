@@ -12,7 +12,6 @@ public class InventoryDeliveryNote extends Note {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-
     public InventoryDeliveryNote() {
     }
 
