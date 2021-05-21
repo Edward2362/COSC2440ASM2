@@ -5,7 +5,7 @@ import javax.persistence.*;
 @MappedSuperclass
 public abstract class NoteDetail {
 
-    @ManyToOne(fetch= FetchType.LAZY)
+    @ManyToOne(fetch= FetchType.EAGER)
     @JoinColumn(name="product_id", nullable = false)
     private Product productID;
 

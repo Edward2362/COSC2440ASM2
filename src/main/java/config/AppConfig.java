@@ -30,7 +30,7 @@ public class AppConfig {
 
         LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
 
-        sessionFactoryBean.setPackagesToScan("com.example.practice2.model");
+//        sessionFactoryBean.setPackagesToScan("com.example.practice2.model");
 
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");

@@ -11,7 +11,7 @@ public class Customer extends AbstractForCP{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany(mappedBy = "customerID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customerID", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<SaleInvoice> saleInvoiceId;
 
     public Customer() {
