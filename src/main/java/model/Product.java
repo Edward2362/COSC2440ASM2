@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "product")
+@Table(name = "Product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -110,5 +110,9 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Product updateProduct(Product product){
+        return new Product();
     }
 }

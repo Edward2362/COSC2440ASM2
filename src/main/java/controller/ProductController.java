@@ -15,18 +15,4 @@ public class ProductController {
     @Autowired
     public ProductService productService;
 
-    @RequestMapping(path="/products", method = RequestMethod.GET)
-    public List<Product> getAllProducts() {
-        return productService.getAllProducts();
-    }
-
-    @RequestMapping(path="/products/{id}", method = RequestMethod.GET)
-    public Product getProduct(@PathVariable("id") int id){
-        return productService.getProduct(id);
-    }
-
-    @RequestMapping(path="/products", method = RequestMethod.POST)
-    public int createProduct(Product product){
-        return productService.addProduct(product);
-    }
 }

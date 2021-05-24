@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "provider")
+@Table(name = "Provider")
 public class Provider extends AbstractForCP{
     @Id
     @Column

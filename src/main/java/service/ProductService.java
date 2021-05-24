@@ -1,38 +1,61 @@
 package service;
 
-import model.Category;
 import model.Product;
-import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
 
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Transactional
-@Service
 public class ProductService {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public List<Product> getAllProducts(){
-        return sessionFactory.getCurrentSession().createQuery("from Product").list();
+    public List<Product> getAllProducts() {
+        Query query = sessionFactory.getCurrentSession().createQuery("from Product");
+        return query.list();
     }
 
-    public Product getProduct(int id){
-        List<Product> allProductsList = getAllProducts();
-        for (Product product:allProductsList){
-            if (product.getId() == id){
-                return product;
-            }
-        }
-        return null;
+    public List<Product> getProductById(int id) {
+        Query query = sessionFactory.getCurrentSession().createQuery("from Product p where p.id like :id");
+        query.setString("id", "%" + id + "%");
+        return query.list();
     }
 
-    public int addProduct(Product product){
-        sessionFactory.getCurrentSession().save(product);
-        return product.getId();
+    public int addProduct(Product product) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "insert into Product(:productName, :productModel, :productBrand, :productCompany, :productDescription, :productCategory)"
+        );
+        query.setString("productName", "%" + product.getName() + "%");
+        query.setString("productModel", "%" + product.getModel() + "%");
+        query.setString("productBrand", "%" + product.getBrand() + "%");
+        query.setString("productCompany", "%" + product.getCompany() + "%");
+        query.setString("productDescription", "%" + product.getDescription() + "%");
+        query.setString("productCategory", "%" + product.getCategoryId() + "%");
+        return query.executeUpdate();
     }
 
+    public int updateProduct(Product product) {
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "update Product set name=:productName, model=:productModel, brand=:productBrand, company=:productCompany, description=:productDescription, category=:productCategory"
+        );
+        query.setString("productName", "%" + product.getName() + "%");
+        query.setString("productModel", "%" + product.getModel() + "%");
+        query.setString("productBrand", "%" + product.getBrand() + "%");
+        query.setString("productCompany", "%" + product.getCompany() + "%");
+        query.setString("productDescription", "%" + product.getDescription() + "%");
+        query.setString("productCategory", "%" + product.getCategoryId() + "%");
+        return query.executeUpdate();
+    }
+
+    public int deleteProduct(int id){
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "delete Product p where p.id=:id"
+        );
+        query.setString("id", "%"+id+"%");
+        return query.executeUpdate();
+    }
 }
