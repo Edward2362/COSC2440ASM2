@@ -29,8 +29,11 @@ public class CategoryService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "insert into Category(:categoryId, :categoryName)"
         );
-        query.setString("categoryId", "%"+category.getId()+"%");
-        query.setString("categoryName", "%"+category.getName()+"%");
+        for (Product product : category.getProducts()) {
+            product.setCategory(category);
+        }
+        query.setString("categoryId", "%" + category.getId() + "%");
+        query.setString("categoryName", "%" + category.getName() + "%");
         return query.executeUpdate();
     }
 
@@ -38,16 +41,16 @@ public class CategoryService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "insert into Category(:categoryId, :categoryName)"
         );
-        query.setString("categoryId", "%"+category.getId()+"%");
-        query.setString("categoryName", "%"+category.getName()+"%");
+        query.setString("categoryId", "%" + category.getId() + "%");
+        query.setString("categoryName", "%" + category.getName() + "%");
         return query.executeUpdate();
     }
 
-    public int deleteCategory(int id){
+    public int deleteCategory(int id) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "delete Category where id=:id"
         );
-        query.setString("id", "%"+id+"%");
+        query.setString("id", "%" + id + "%");
         return query.executeUpdate();
     }
 }

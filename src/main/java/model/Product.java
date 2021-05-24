@@ -100,7 +100,7 @@ public class Product {
         return categoryId;
     }
 
-    public void setCategoryId(Category categoryId) {
+    public void setCategory(Category categoryId) {
         this.categoryId = categoryId;
     }
 

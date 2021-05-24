@@ -1,6 +1,7 @@
 package service;
 
 import model.Customer;
+import model.SaleInvoice;
 import model.Staff;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -59,6 +60,11 @@ public class CustomerService {
         query.setString("customerEmail", "%" + customer.getEmail() + "%");
         query.setString("customerFax", "%" + customer.getFax() + "%");
         query.setString("customerContact", "%" + customer.getContactPerson() + "%");
+
+        for (SaleInvoice saleInvoice : customer.getSaleInvoiceId()) {
+            saleInvoice.setCustomerID(customer);
+        }
+
         return query.executeUpdate();
     }
 
