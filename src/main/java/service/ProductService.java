@@ -38,10 +38,11 @@ public class ProductService {
         return query.executeUpdate();
     }
 
-    public int updateProduct(Product product) {
+    public int updateProduct(int id, Product product) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "update Product set name=:productName, model=:productModel, brand=:productBrand, company=:productCompany, description=:productDescription, category=:productCategory"
+                "update Product set name=:productName, model=:productModel, brand=:productBrand, company=:productCompany, description=:productDescription, category=:productCategory where id=:id"
         );
+        query.setString("id", "%" + id + "%");
         query.setString("productName", "%" + product.getName() + "%");
         query.setString("productModel", "%" + product.getModel() + "%");
         query.setString("productBrand", "%" + product.getBrand() + "%");
@@ -51,11 +52,11 @@ public class ProductService {
         return query.executeUpdate();
     }
 
-    public int deleteProduct(int id){
+    public int deleteProduct(int id) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "delete Product p where p.id=:id"
         );
-        query.setString("id", "%"+id+"%");
+        query.setString("id", "%" + id + "%");
         return query.executeUpdate();
     }
 }

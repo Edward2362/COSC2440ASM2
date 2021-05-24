@@ -1,7 +1,7 @@
 package service;
 
 import model.Provider;
-import model.Staff;
+import model.Provider;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +16,14 @@ public class ProviderService {
 
     public void setSessionFactory(SessionFactory sessionFactory){this.sessionFactory=sessionFactory;}
 
-    public List<Staff> getAllProviders(){
+    public List<Provider> getAllProviders(){
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "from Provider"
         );
         return query.list();
     }
 
-    public List<Staff> getProviderById(int id){
+    public List<Provider> getProviderById(int id){
         Query query = sessionFactory.getCurrentSession().createQuery("from Provider where id=:id");
         query.setString("id", "%"+id+"%");
         return query.list();
@@ -42,10 +42,11 @@ public class ProviderService {
         return query.executeUpdate();
     }
 
-    public int updateProvider(Provider provider){
+    public int updateProvider(int id, Provider provider){
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "update Provider set name=:providerName, address=:providerAddress, phone=:providerPhone, email=:providerEmail, fax=:providerFax, contactPerson=:providerContact"
+                "update Provider set name=:providerName, address=:providerAddress, phone=:providerPhone, email=:providerEmail, fax=:providerFax, contactPerson=:providerContact where id=:id"
         );
+        query.setString("id", "%" + id + "%");
         query.setString("providerName", "%" + provider.getName() + "%");
         query.setString("providerAddress", "%" + provider.getAddress() + "%");
         query.setString("providerPhone", "%" + provider.getPhone() + "%");

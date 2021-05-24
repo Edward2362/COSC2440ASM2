@@ -19,7 +19,7 @@ public class CategoryService {
         return query.list();
     }
 
-    public List<Product> getCategoryById(int id) {
+    public List<Category> getCategoryById(int id) {
         Query query = sessionFactory.getCurrentSession().createQuery("from Category c where c.id like :id");
         query.setString("id", "%" + id + "%");
         return query.list();
@@ -37,10 +37,11 @@ public class CategoryService {
         return query.executeUpdate();
     }
 
-    public int updateCategory(Category category) {
+    public int updateCategory(int id, Category category) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "insert into Category(:categoryId, :categoryName)"
+                "insert into Category(:categoryId, :categoryName where id=:id)"
         );
+        query.setString("id", "%" + id + "%");
         query.setString("categoryId", "%" + category.getId() + "%");
         query.setString("categoryName", "%" + category.getName() + "%");
         return query.executeUpdate();

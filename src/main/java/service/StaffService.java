@@ -41,10 +41,11 @@ public class StaffService {
         return query.executeUpdate();
     }
 
-    public int updateStaff(Staff staff){
+    public int updateStaff(int id, Staff staff){
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "update Staff set name=:staffName, address=:staffAddress, phone=:staffPhone, email=:staffEmail"
+                "update Staff set name=:staffName, address=:staffAddress, phone=:staffPhone, email=:staffEmail where id=:id"
         );
+        query.setString("id", "%" + id + "%");
         query.setString("staffName", "%" + staff.getName() + "%");
         query.setString("staffAddress", "%" + staff.getAddress() + "%");
         query.setString("staffPhone", "%" + staff.getPhone() + "%");
