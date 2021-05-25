@@ -44,6 +44,7 @@ public class CategoryService {
         query.setString("id", "%" + id + "%");
         query.setString("categoryId", "%" + category.getId() + "%");
         query.setString("categoryName", "%" + category.getName() + "%");
+
         return query.executeUpdate();
     }
 

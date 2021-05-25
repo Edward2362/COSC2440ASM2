@@ -1,8 +1,9 @@
 package service;
 
-import model.DeliveryDetail;
-import org.hibernate.Criteria;
+import model.Order;
+import model.OrderDetail;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
@@ -13,8 +14,51 @@ public class DeliveryDetailService {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public List<DeliveryDetail> getAllDeliveryDetails(){
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(DeliveryDetail.class);
-        return criteria.list();
+    public List<OrderDetail> getAllOrderDetails(){
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "select deliveryDetail"
+        );
+        return query.list();
     }
+
+    public List<OrderDetail> getOrderDetailById(int id){
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "select orderDetail where id=:id"
+        );
+        query.setString("id", "%"+id+"%");
+        return query.list();
+    }
+
+    public int addOrderDetail(OrderDetail orderDetail){
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "insert into orderDetail(productId=:productId, quantity=:quantity, price=:price)"
+        );
+        query.setString("productId", "&"+orderDetail.getProductID()+"%");
+        query.setString("quantity", "&"+orderDetail.getQuantity()+"%");
+        query.setString("price", "&"+orderDetail.getPrice()+"%");
+
+        return query.executeUpdate();
+    }
+
+    public int updateOrderDetail(int id, OrderDetail orderDetail){
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "update orderDetail productId=:productId, quantity=:quantity, price=:price where id=:id"
+        );
+        query.setString("productId", "&"+orderDetail.getProductID()+"%");
+        query.setString("quantity", "&"+orderDetail.getQuantity()+"%");
+        query.setString("price", "&"+orderDetail.getPrice()+"%");
+        query.setString("id", "&"+id+"%");
+
+        return query.executeUpdate();
+    }
+
+    public int deleteOrderDetail(int id){
+        Query query = sessionFactory.getCurrentSession().createQuery(
+                "delete orderDetail where id=:id"
+        );
+        query.setString("id", "&"+id+"%");
+
+        return query.executeUpdate();
+    }
+
 }

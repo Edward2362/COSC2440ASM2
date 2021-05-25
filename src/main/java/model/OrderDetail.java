@@ -70,4 +70,8 @@ public class OrderDetail extends NoteDetail{
     public void setQuantity(int quantity) {
         super.setQuantity(quantity);
     }
+
+    public void setOrderId(Order order){
+        this.orderID = order;
+    }
 }

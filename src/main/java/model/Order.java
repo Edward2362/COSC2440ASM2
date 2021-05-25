@@ -19,11 +19,11 @@ public class Order extends Note{
     private int id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "providerID", nullable = false)
+    @JoinColumn(name = "providerId", nullable = false)
     private Provider providerID;
 
-    @OneToMany(mappedBy = "orderID", cascade = CascadeType.ALL, fetch =
-            FetchType.EAGER)
+    @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL, fetch =
+            FetchType.EAGER, orphanRemoval = true)
     private List<OrderDetail> orderDetailList;
 
     public Order() {
