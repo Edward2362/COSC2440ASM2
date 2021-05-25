@@ -2,9 +2,10 @@ package model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name = "order")
+@Table(name = "Order")
 public class Order {
 
     @Id
@@ -16,27 +17,27 @@ public class Order {
     private Date date;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "staffID", nullable = false)
+    @JoinColumn(name = "staffId", nullable = false)
     private Staff staffID;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "providerID", nullable = false)
+    @JoinColumn(name = "providerId", nullable = false)
     private Provider providerID;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "DetailID", nullable = false)
-    private OrderDetail orderDetailID;
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "detailId", nullable = false)
+    private List<OrderDetail> orderDetailID;
 
     public Order() {
     }
 
-    public Order(int id, Date date, Staff staffID, Provider providerID, OrderDetail orderDetailID) {
-        this.id = id;
-        this.date = date;
-        this.staffID = staffID;
-        this.providerID = providerID;
-        this.orderDetailID = orderDetailID;
-    }
+//    public Order(int id, Date date, Staff staffID, Provider providerID, OrderDetail orderDetailID) {
+//        this.id = id;
+//        this.date = date;
+//        this.staffID = staffID;
+//        this.providerID = providerID;
+//        this.orderDetailID = orderDetailID;
+//    }
 
     public int getId() {
         return id;
@@ -70,11 +71,11 @@ public class Order {
         this.providerID = providerID;
     }
 
-    public OrderDetail getOrderDetailID() {
+    public List<OrderDetail> getOrderDetailID() {
         return orderDetailID;
     }
 
-    public void setOrderDetailID(OrderDetail orderDetailID) {
-        this.orderDetailID = orderDetailID;
-    }
+//    public void setOrderDetailID(OrderDetail orderDetailID) {
+//        this.orderDetailID = orderDetailID;
+//    }
 }

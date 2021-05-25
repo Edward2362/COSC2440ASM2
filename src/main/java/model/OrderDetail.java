@@ -15,6 +15,9 @@ public class OrderDetail extends NoteDetail{
     @Column
     private int price;
 
+    @ManyToOne
+    private Order order;
+
     public OrderDetail() {
     }
 
@@ -52,5 +55,9 @@ public class OrderDetail extends NoteDetail{
     @Override
     public void setQuantity(int quantity) {
         super.setQuantity(quantity);
+    }
+
+    public void setOrderId(Order order){
+        this.order = order;
     }
 }
