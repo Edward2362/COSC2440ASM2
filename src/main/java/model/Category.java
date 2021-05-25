@@ -14,7 +14,7 @@ public class Category {
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "categoryId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "categoryId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Product> products;
 
     public Category() {

@@ -4,14 +4,14 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "customer")
+@Table(name = "Customer")
 public class Customer extends AbstractForCP{
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany(mappedBy = "customerID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customerID", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<SaleInvoice> saleInvoiceId;
 
     public Customer() {

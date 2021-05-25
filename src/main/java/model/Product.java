@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "product")
+@Table(name = "Product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class Product {
     @Column
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
     private Category categoryId;
 
@@ -100,7 +100,7 @@ public class Product {
         return categoryId;
     }
 
-    public void setCategoryId(Category categoryId) {
+    public void setCategory(Category categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -110,5 +110,9 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Product updateProduct(Product product){
+        return new Product();
     }
 }
