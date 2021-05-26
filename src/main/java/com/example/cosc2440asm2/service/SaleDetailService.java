@@ -32,12 +32,11 @@ public class SaleDetailService {
 
     public int updateSaleDetail(int saleDetailId, SaleDetail saleDetail) {
         SaleDetail existedSaleDetail = (SaleDetail) sessionFactory.getCurrentSession().get(SaleDetail.class, saleDetailId);
-        existedSaleDetail.setId(saleDetail.getId());
         existedSaleDetail.setPrice(saleDetail.getPrice());
         existedSaleDetail.setQuantity(saleDetail.getQuantity());
-        existedSaleDetail.setSaleInvoiceID(saleDetail.getSaleInvoiceID());
         existedSaleDetail.setProductID(saleDetail.getProductID());
         existedSaleDetail.setTotalValue(saleDetail.getTotalValue());
+        sessionFactory.getCurrentSession().update(existedSaleDetail);
         return existedSaleDetail.getId();
     }
 

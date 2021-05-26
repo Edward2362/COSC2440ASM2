@@ -3,7 +3,7 @@ package com.example.cosc2440asm2.model;
 import javax.persistence.*;
 
 @MappedSuperclass
-public abstract class AbstractForCP {
+public abstract class Stakeholder {
 
     @Column
     private String name;

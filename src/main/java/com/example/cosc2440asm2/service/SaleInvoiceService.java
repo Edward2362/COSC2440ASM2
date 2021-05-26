@@ -33,9 +33,8 @@ public class SaleInvoiceService {
         SaleInvoice existedSaleInvoice = (SaleInvoice)sessionFactory.getCurrentSession().get(SaleInvoice.class, saleInvoiceId);
         existedSaleInvoice.setDate(saleInvoice.getDate());
         existedSaleInvoice.setCustomerID(saleInvoice.getCustomerID());
-        existedSaleInvoice.setId(saleInvoice.getId());
         existedSaleInvoice.setStaffID(saleInvoice.getStaffID());
-        existedSaleInvoice.setSaleDetailList(saleInvoice.getSaleDetailList());
+        sessionFactory.getCurrentSession().update(existedSaleInvoice);
         return existedSaleInvoice.getId();
     }
 
