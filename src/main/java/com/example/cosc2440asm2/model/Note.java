@@ -9,7 +9,7 @@ public abstract class Note {
     private Date date;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "staffId", nullable = false)
+    @JoinColumn(name = "staffId")
     private Staff staffID;
 
     public Date getDate() {
