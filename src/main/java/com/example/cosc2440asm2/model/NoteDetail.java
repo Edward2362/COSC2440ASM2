@@ -6,7 +6,7 @@ import javax.persistence.*;
 public abstract class NoteDetail {
 
     @ManyToOne(fetch= FetchType.EAGER)
-    @JoinColumn(name="product_id", nullable = false)
+    @JoinColumn(name="product_id")
     private Product productID;
 
     @Column
