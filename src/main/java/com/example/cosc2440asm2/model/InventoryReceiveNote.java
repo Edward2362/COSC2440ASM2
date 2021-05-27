@@ -1,5 +1,7 @@
 package com.example.cosc2440asm2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.FetchType;
 import javax.persistence.*;
 import java.util.Date;
@@ -13,8 +15,9 @@ public class InventoryReceiveNote extends Note{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "inventoryReceiveNoteID", cascade = CascadeType.ALL, fetch =
-            FetchType.EAGER)
+            FetchType.LAZY)
     private List<ReceivingDetail> receivingDetailList;
 
     public InventoryReceiveNote(){};
