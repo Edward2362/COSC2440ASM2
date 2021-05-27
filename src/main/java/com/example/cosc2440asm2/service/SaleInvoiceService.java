@@ -1,5 +1,6 @@
 package com.example.cosc2440asm2.service;
 
+import com.example.cosc2440asm2.model.SaleDetail;
 import com.example.cosc2440asm2.model.SaleInvoice;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
@@ -19,6 +20,9 @@ public class SaleInvoiceService {
     public void setSessionFactory(SessionFactory sessionFactory){this.sessionFactory=sessionFactory;}
 
     public int addSaleInvoice(SaleInvoice saleInvoice) {
+        for (SaleDetail saleDetail: saleInvoice.getSaleDetailList()) {
+            saleDetail.setSaleInvoiceID(saleInvoice);
+        }
         sessionFactory.getCurrentSession().save(saleInvoice);
         return saleInvoice.getId();
     }
