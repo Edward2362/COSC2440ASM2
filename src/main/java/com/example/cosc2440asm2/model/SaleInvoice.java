@@ -1,6 +1,8 @@
 package com.example.cosc2440asm2.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,9 +20,9 @@ public class SaleInvoice extends Note {
     @JoinColumn(name = "customer_id")
     private Customer customerID;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "saleInvoiceID", cascade = CascadeType.ALL, fetch =
-            FetchType.LAZY)
+            FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
     private List<SaleDetail> saleDetailList;
 
     public SaleInvoice(){};
