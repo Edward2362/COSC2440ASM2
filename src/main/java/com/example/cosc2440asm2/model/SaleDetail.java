@@ -20,7 +20,7 @@ public class SaleDetail extends NoteDetail{
     @Column
     private long totalValue;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "sale_invoice_id", nullable = false)
     private SaleInvoice saleInvoiceID;
 

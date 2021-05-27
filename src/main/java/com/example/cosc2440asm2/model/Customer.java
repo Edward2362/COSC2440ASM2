@@ -5,7 +5,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "Customer")
-public class Customer extends AbstractForCP{
+public class Customer extends Stakeholder {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)

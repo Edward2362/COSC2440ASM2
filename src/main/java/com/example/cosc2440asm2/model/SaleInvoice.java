@@ -1,11 +1,13 @@
 package com.example.cosc2440asm2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "salesInvoice")
+@Table(name = "saleInvoice")
 public class SaleInvoice extends Note {
     @Id
     @Column
@@ -16,8 +18,9 @@ public class SaleInvoice extends Note {
     @JoinColumn(name = "customer_id")
     private Customer customerID;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "saleInvoiceID", cascade = CascadeType.ALL, fetch =
-            FetchType.EAGER)
+            FetchType.LAZY)
     private List<SaleDetail> saleDetailList;
 
     public SaleInvoice(){};

@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Provider")
-public class Provider extends AbstractForCP{
+public class Provider extends Stakeholder {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
