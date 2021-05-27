@@ -33,14 +33,17 @@ public class StaffService {
     }
 
     public int addStaff(Staff staff){
-        Query query = sessionFactory.getCurrentSession().createQuery(
-                "insert into Staff(:staffName, :staffAddress, :staffPhone, :staffEmail)"
-        );
-        query.setString("staffName", "%" + staff.getName() + "%");
-        query.setString("staffAddress", "%" + staff.getAddress() + "%");
-        query.setString("staffPhone", "%" + staff.getPhone() + "%");
-        query.setString("staffEmail", "%" + staff.getEmail() + "%");
-        return query.executeUpdate();
+//        Query query = sessionFactory.getCurrentSession().createQuery(
+//                "insert into Staff(:staffName, :staffAddress, :staffPhone, :staffEmail)"
+//        );
+//        query.setString("staffName", "%" + staff.getName() + "%");
+//        query.setString("staffAddress", "%" + staff.getAddress() + "%");
+//        query.setString("staffPhone", "%" + staff.getPhone() + "%");
+//        query.setString("staffEmail", "%" + staff.getEmail() + "%");
+//
+//        return query.executeUpdate();
+        this.sessionFactory.getCurrentSession().save(staff);
+        return staff.getId();
     }
 
     public int updateStaff(int id, Staff staff){
