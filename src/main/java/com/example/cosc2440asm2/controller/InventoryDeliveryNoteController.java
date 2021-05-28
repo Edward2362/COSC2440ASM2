@@ -41,7 +41,7 @@ public class InventoryDeliveryNoteController {
         return inventoryDeliveryNoteService.deleteInventoryDeliveryNote(id);
     }
 
-    @RequestMapping(value = "/deliveryNoteDate/sDate/edate", method = RequestMethod.GET)
+    @RequestMapping(value = "/deliveryNoteDate/{sDate}/{eDate}", method = RequestMethod.GET)
     public List<InventoryDeliveryNote> filterByDate(@PathVariable(name = "sDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date sDate, @PathVariable(name = "eDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date eDate){
         return inventoryDeliveryNoteService.filterByDate(sDate, eDate);
     }
