@@ -17,8 +17,8 @@ public class ReceivingDetailController {
         return  receivingDetailService.getAllReceivingDetails();
     }
 
-    @RequestMapping(value = "/receiveDetail", method = RequestMethod.GET)
-    public ReceivingDetail getReceivingDetailById(@RequestParam(name = "id") int id){
+    @RequestMapping(value = "/receiveDetail/{id}", method = RequestMethod.GET)
+    public ReceivingDetail getReceivingDetailById(@PathVariable(name = "id") int id){
         return receivingDetailService.getReceivingDetailById(id);
     }
 
@@ -27,13 +27,13 @@ public class ReceivingDetailController {
 //        return receivingDetailService.addReceivingDetails(receivingDetail);
 //    }
 
-    @RequestMapping(value = "/receiveDetail", method = RequestMethod.PUT)
-    public int updateReceivingDetail(@RequestBody ReceivingDetail receivingDetail,@RequestParam(name = "id") int id ){
+    @RequestMapping(value = "/receiveDetail/{id}", method = RequestMethod.PUT)
+    public int updateReceivingDetail(@RequestBody ReceivingDetail receivingDetail, @PathVariable(name = "id") int id ){
         return receivingDetailService.updateReceivingDetail(id, receivingDetail);
     }
 
-    @RequestMapping(value = "/receiveDetail", method = RequestMethod.DELETE)
-    public int deleteReceivingDetail(@RequestParam(name = "id") int id ){
+    @RequestMapping(value = "/receiveDetail/{id}", method = RequestMethod.DELETE)
+    public int deleteReceivingDetail(@PathVariable(name = "id") int id ){
         return receivingDetailService.deleteReceivingDetails(id);
     }
 //
