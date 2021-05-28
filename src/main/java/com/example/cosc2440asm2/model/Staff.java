@@ -1,6 +1,8 @@
 package com.example.cosc2440asm2.model;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Where;
+import org.hibernate.sql.Delete;
 
 import java.util.List;
 import javax.persistence.*;

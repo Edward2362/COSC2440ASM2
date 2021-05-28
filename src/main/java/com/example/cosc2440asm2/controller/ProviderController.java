@@ -1,6 +1,7 @@
 package com.example.cosc2440asm2.controller;
 
 import com.example.cosc2440asm2.model.Provider;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.cosc2440asm2.service.ProviderService;
@@ -37,9 +38,4 @@ public class ProviderController {
     public int deleteProvider(@PathVariable(name="id") int id){
         return providerService.deleteProvider(id);
     }
-
-//    @RequestMapping("*")
-//    public String fallbackMethod() {
-//        return "No matching endpoint found.\n";
-//    }
 }

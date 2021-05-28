@@ -17,6 +17,7 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
+
     @RequestMapping(value = "/products/{id}", method = RequestMethod.GET)
     public List<Product> getProductById(@PathVariable(name = "id") int id) {
         return productService.getProductById(id);
@@ -36,9 +37,4 @@ public class ProductController {
     public int deleteProduct(@PathVariable(name = "id") int id) {
         return productService.deleteProduct(id);
     }
-
-//    @RequestMapping("*")
-//    public String fallbackMethod() {
-//        return "No matching endpoint found.\n";
-//    }
 }

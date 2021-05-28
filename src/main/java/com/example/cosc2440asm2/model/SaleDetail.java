@@ -1,6 +1,9 @@
 package com.example.cosc2440asm2.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,7 +23,8 @@ public class SaleDetail extends NoteDetail{
     @Column
     private long totalValue;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sale_invoice_id", nullable = false)
     private SaleInvoice saleInvoiceID;
 

@@ -1,6 +1,7 @@
 package com.example.cosc2440asm2.service;
 
 import com.example.cosc2440asm2.model.Staff;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,15 +34,16 @@ public class StaffService {
     }
 
     public int addStaff(Staff staff){
-        this.sessionFactory.getCurrentSession().save(staff);
+        sessionFactory.getCurrentSession().save(staff);
         return staff.getId();
     }
 
+
     public int updateStaff(int id, Staff staff){
+        String strId = String.valueOf(id);
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "update Staff set name = :staffName, address = :staffAddress, phone = :staffPhone, email = :staffEmail where id = :id"
         );
-//        query.setParameter()("id", "%" + String.valueOf(id) + "%");
         query.setParameter("id", id);
         query.setParameter("staffName", staff.getName());
         query.setParameter("staffAddress", staff.getAddress());
@@ -50,7 +52,7 @@ public class StaffService {
         return query.executeUpdate();
     }
 
-    public int deleteStaff(int id){
+  public int deleteStaff(int id){
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "delete Staff where id=:id"
         );

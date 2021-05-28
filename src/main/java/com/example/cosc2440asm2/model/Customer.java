@@ -11,8 +11,8 @@ public class Customer extends Stakeholder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany(mappedBy = "customerID", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<SaleInvoice> saleInvoiceId;
+//    @OneToMany(mappedBy = "customerID", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    private List<SaleInvoice> saleInvoiceId;
 
     public Customer() {
     }
@@ -25,13 +25,13 @@ public class Customer extends Stakeholder {
         this.id = id;
     }
 
-    public List<SaleInvoice> getSaleInvoiceId() {
-        return saleInvoiceId;
-    }
-
-    public void setSaleInvoiceId(List<SaleInvoice> saleInvoiceId) {
-        this.saleInvoiceId = saleInvoiceId;
-    }
+//    public List<SaleInvoice> getSaleInvoiceId() {
+//        return saleInvoiceId;
+//    }
+//
+//    public void setSaleInvoiceId(List<SaleInvoice> saleInvoiceId) {
+//        this.saleInvoiceId = saleInvoiceId;
+//    }
 
     @Override
     public String getName() {

@@ -2,7 +2,11 @@ package com.example.cosc2440asm2.service;
 
 import com.example.cosc2440asm2.model.Customer;
 import com.example.cosc2440asm2.model.SaleInvoice;
+import com.example.cosc2440asm2.model.Staff;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

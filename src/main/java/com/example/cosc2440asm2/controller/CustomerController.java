@@ -17,6 +17,7 @@ public class CustomerController {
         return customerService.getAllCustomers();
     }
 
+
     @RequestMapping(value = "/customers/{id}", method= RequestMethod.GET)
     public List<Customer> getCustomerById(@PathVariable(name="id") int id){
         return customerService.getCustomerById(id);

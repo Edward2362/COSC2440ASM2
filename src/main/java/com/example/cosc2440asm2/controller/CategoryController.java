@@ -18,6 +18,7 @@ public class CategoryController {
         return categoryService.getAllCategories();
     }
 
+
     @RequestMapping(value = "/categories/{id}", method = RequestMethod.GET)
     public List<Category> getCategoryById(@PathVariable(name = "id") int id) {
         return categoryService.getCategoryById(id);

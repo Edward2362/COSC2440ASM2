@@ -1,5 +1,8 @@
 package com.example.cosc2440asm2.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.FetchType;
 import javax.persistence.*;
 import java.util.Date;
@@ -15,6 +18,7 @@ public class InventoryReceiveNote extends Note{
 
     @OneToMany(mappedBy = "inventoryReceiveNoteID", cascade = CascadeType.ALL, fetch =
             FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
     private List<ReceivingDetail> receivingDetailList;
 
     public InventoryReceiveNote(){};

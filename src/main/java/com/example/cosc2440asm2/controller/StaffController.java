@@ -27,6 +27,7 @@ public class StaffController {
         return staffService.addStaff(staff);
     }
 
+
     @RequestMapping(value = "/staffs/{id}", method = RequestMethod.PUT)
     public int updateStaff(@RequestBody Staff staff, @PathVariable(name = "id") int id) {
         return staffService.updateStaff(id, staff);
@@ -37,8 +38,4 @@ public class StaffController {
         return staffService.deleteStaff(id);
     }
 
-//    @RequestMapping("*")
-//    public String fallbackMethod() {
-//        return "No matching endpoint found.\n";
-//    }
 }
