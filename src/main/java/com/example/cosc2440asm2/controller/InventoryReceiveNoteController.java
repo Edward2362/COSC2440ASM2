@@ -20,8 +20,8 @@ public class InventoryReceiveNoteController {
         return  inventoryReceiveNoteService.getAllReceiveNotes();
     }
 
-    @RequestMapping(value = "/receiveNote", method = RequestMethod.GET)
-    public InventoryReceiveNote getInventoryReceiveNoteById(@RequestParam(name = "id") int id){
+    @RequestMapping(value = "/receiveNote/{id}", method = RequestMethod.GET)
+    public InventoryReceiveNote getInventoryReceiveNoteById(@PathVariable(name = "id") int id){
         return inventoryReceiveNoteService.getInventoryReceiveNoteById(id);
     }
 
@@ -30,18 +30,18 @@ public class InventoryReceiveNoteController {
         return inventoryReceiveNoteService.addInventoryReceiveNote(inventoryReceiveNote);
     }
 
-    @RequestMapping(value = "/receiveNote", method = RequestMethod.PUT)
-    public int updateInventoryReceiveNote(@RequestBody InventoryReceiveNote inventoryReceiveNote,@RequestParam(name = "id") int id ){
+    @RequestMapping(value = "/receiveNote/{id}", method = RequestMethod.PUT)
+    public int updateInventoryReceiveNote(@RequestBody InventoryReceiveNote inventoryReceiveNote,@PathVariable(name = "id") int id ){
         return inventoryReceiveNoteService.updateInventoryReceiveNote(id,inventoryReceiveNote);
     }
 
-    @RequestMapping(value = "/receiveNote", method = RequestMethod.DELETE)
-    public int deleteInventoryReceiveNote(@RequestParam(name = "id") int id ){
+    @RequestMapping(value = "/receiveNote/{id}", method = RequestMethod.DELETE)
+    public int deleteInventoryReceiveNote(@PathVariable(name = "id") int id ){
         return inventoryReceiveNoteService.deleteInventoryReceiveNote(id);
     }
 
-    @RequestMapping(value = "/receiveNoteDate", method = RequestMethod.GET)
-    public List<InventoryReceiveNote> filterByDate(@RequestParam(name = "sDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date sDate, @RequestParam(name = "eDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date eDate){
+    @RequestMapping(value = "/receiveNoteDate/{sdate}/{eDate}", method = RequestMethod.GET)
+    public List<InventoryReceiveNote> filterByDate(@PathVariable(name = "sDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date sDate, @PathVariable(name = "eDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date eDate){
         return inventoryReceiveNoteService.filterByDate(sDate, eDate);
     }
 
