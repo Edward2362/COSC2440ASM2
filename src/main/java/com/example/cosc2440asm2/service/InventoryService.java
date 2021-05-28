@@ -4,18 +4,26 @@ package com.example.cosc2440asm2.service;
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.transaction.Transactional;
 import java.sql.Date;
 import java.util.List;
 
+@Service
+@Transactional
 public class InventoryService {
     @Autowired
     private SessionFactory sessionFactory;
 
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
     @RequestMapping(value = "/inventory", method= RequestMethod.GET)
-    public void getInventoryByDate(String startDate, String endDate){
+    public List getInventoryByDate(Date startDate, Date endDate){
         SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(
                 "select p.name d.quantity r.quantity, (r.quantity-d.quantity) as balance\n" +
                         "\tfrom product p \n" +
@@ -27,6 +35,6 @@ public class InventoryService {
         );
         query.setString("startDate", "%"+startDate+"%");
         query.setString("endDate", "%"+endDate+"%");
-        query.list();
+        return query.list();
     }
 }
