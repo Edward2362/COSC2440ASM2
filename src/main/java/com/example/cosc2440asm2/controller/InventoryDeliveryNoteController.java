@@ -31,18 +31,18 @@ public class InventoryDeliveryNoteController {
         return inventoryDeliveryNoteService.addInventoryDeliveryNote(inventoryDeliveryNote);
     }
 
-    @RequestMapping(value = "/deliveryNote", method = RequestMethod.PUT)
-    public int updateInventoryReceiveNote(@RequestBody InventoryDeliveryNote inventoryDeliveryNote,@RequestParam(name = "id") int id ){
+    @RequestMapping(value = "/deliveryNote/{id}", method = RequestMethod.PUT)
+    public int updateInventoryReceiveNote(@RequestBody InventoryDeliveryNote inventoryDeliveryNote,@PathVariable(name = "id") int id ){
         return inventoryDeliveryNoteService.updateInventoryDeliveryNote(id,inventoryDeliveryNote);
     }
 
-    @RequestMapping(value = "/deliveryNote", method = RequestMethod.DELETE)
-    public int deleteInventoryReceiveNote(@RequestParam(name = "id") int id ){
+    @RequestMapping(value = "/deliveryNote/{id}", method = RequestMethod.DELETE)
+    public int deleteInventoryReceiveNote(@PathVariable(name = "id") int id ){
         return inventoryDeliveryNoteService.deleteInventoryDeliveryNote(id);
     }
 
-    @RequestMapping(value = "/deliveryNoteDate", method = RequestMethod.GET)
-    public List<InventoryDeliveryNote> filterByDate(@RequestParam(name = "sDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date sDate, @RequestParam(name = "eDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date eDate){
+    @RequestMapping(value = "/deliveryNoteDate/sDate/edate", method = RequestMethod.GET)
+    public List<InventoryDeliveryNote> filterByDate(@PathVariable(name = "sDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date sDate, @PathVariable(name = "eDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date eDate){
         return inventoryDeliveryNoteService.filterByDate(sDate, eDate);
     }
 }
