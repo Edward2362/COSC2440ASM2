@@ -1,6 +1,8 @@
 package com.example.cosc2440asm2.service;
 
+import com.example.cosc2440asm2.model.Order;
 import com.example.cosc2440asm2.model.Provider;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,16 +33,8 @@ public class ProviderService {
     }
 
     public int addProvider(Provider provider){
-        Query query = sessionFactory.getCurrentSession().createQuery(
-                "insert into Provider(:providerName, :providerAddress, :providerPhone, :providerEmail, :providerFax, :providerContact)"
-        );
-        query.setParameter("providerName", provider.getName());
-        query.setParameter("providerAddress", provider.getAddress());
-        query.setParameter("providerPhone", provider.getPhone());
-        query.setParameter("providerEmail", provider.getEmail());
-        query.setParameter("providerFax", provider.getFax());
-        query.setParameter("providerContact", provider.getContactPerson());
-        return query.executeUpdate();
+        sessionFactory.getCurrentSession().save(provider);
+        return provider.getId();
     }
 
     public int updateProvider(int id, Provider provider){
@@ -58,10 +52,18 @@ public class ProviderService {
     }
 
     public int deleteProvider(int id){
-        Query query = sessionFactory.getCurrentSession().createQuery(
-                "delete Provider c where c.id=:id"
-        );
-        query.setParameter("id", id);
-        return query.executeUpdate();
+        Provider existedProvider = (Provider) sessionFactory.getCurrentSession().get(Provider.class, id);
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Order.class);
+        for (Object object: criteria.list()){
+            Order order = (Order) object;
+            if (order.getProviderID() != null){
+                if (order.getProviderID().getId() == id){
+                    order.setProviderID(null);
+                    sessionFactory.getCurrentSession().update(order);
+                }
+            }
+        }
+        sessionFactory.getCurrentSession().delete(existedProvider);
+        return existedProvider.getId();
     }
 }

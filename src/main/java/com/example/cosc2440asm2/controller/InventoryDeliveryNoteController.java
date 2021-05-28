@@ -4,14 +4,12 @@ import com.example.cosc2440asm2.model.InventoryDeliveryNote;
 import com.example.cosc2440asm2.service.InventoryDeliveryNoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
 
+@RestController
 public class InventoryDeliveryNoteController {
     @Autowired
     public InventoryDeliveryNoteService inventoryDeliveryNoteService;
@@ -21,8 +19,8 @@ public class InventoryDeliveryNoteController {
         return  inventoryDeliveryNoteService.getAllDeliveryNote();
     }
 
-    @RequestMapping(value = "/deliveryNote", method = RequestMethod.GET)
-    public List<InventoryDeliveryNote> getInventoryDeliveryNoteById(@RequestParam(name = "id") int id){
+    @RequestMapping(value = "/deliveryNote/{id}", method = RequestMethod.GET)
+    public List<InventoryDeliveryNote> getInventoryDeliveryNoteById(@PathVariable(name = "id") int id){
         return inventoryDeliveryNoteService.getInventoryDeliveryNoteById(id);
     }
 

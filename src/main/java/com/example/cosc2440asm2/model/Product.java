@@ -1,5 +1,7 @@
 package com.example.cosc2440asm2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -26,20 +28,8 @@ public class Product {
     private String description;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "category_id")
     private Category categoryId;
-
-//    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<OrderDetail> orderDetailId;
-//
-//    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<DeliveryDetail> deliveryDetailsId;
-//
-//    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<SaleDetail> saleDetailId;
-//
-//    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<ReceivingDetail> receivingDetailId;
 
     @Column
     private double price;
@@ -99,7 +89,7 @@ public class Product {
         return categoryId;
     }
 
-    public void setCategory(Category categoryId) {
+    public void setCategoryId(Category categoryId) {
         this.categoryId = categoryId;
     }
 

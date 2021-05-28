@@ -22,27 +22,19 @@ public class ProductService {
     }
 
     public List<Product> getProductById(int id) {
-        Query query = sessionFactory.getCurrentSession().createQuery("from Product p where p.id like :id");
+        Query query = sessionFactory.getCurrentSession().createQuery("from Product where id=:id");
         query.setParameter("id", id);
         return query.list();
     }
 
     public int addProduct(Product product) {
-        Query query = sessionFactory.getCurrentSession().createQuery(
-                "insert into Product(:productName, :productModel, :productBrand, :productCompany, :productDescription, :productCategory)"
-        );
-        query.setParameter("productName", product.getName());
-        query.setParameter("productModel", product.getModel());
-        query.setParameter("productBrand", product.getBrand());
-        query.setParameter("productCompany", product.getCompany());
-        query.setParameter("productDescription", product.getDescription());
-        query.setParameter("productCategory", product.getCategoryId());
-        return query.executeUpdate();
+        sessionFactory.getCurrentSession().save(product);
+        return product.getId();
     }
 
     public int updateProduct(int id, Product product) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "update Product set name=:productName, model=:productModel, brand=:productBrand, company=:productCompany, description=:productDescription, category=:productCategory where id=:id"
+                "update Product set name=:productName, model=:productModel, brand=:productBrand, company=:productCompany, description=:productDescription, categoryId=:productCategory where id=:id"
         );
         query.setParameter("id", id);
         query.setParameter("productName", product.getName());
@@ -55,10 +47,8 @@ public class ProductService {
     }
 
     public int deleteProduct(int id) {
-        Query query = sessionFactory.getCurrentSession().createQuery(
-                "delete Product p where p.id=:id"
-        );
-        query.setParameter("id", id);
-        return query.executeUpdate();
+        Product existedProduct = (Product) sessionFactory.getCurrentSession().get(Product.class, id);
+        sessionFactory.getCurrentSession().delete(existedProduct);
+        return existedProduct.getId();
     }
 }

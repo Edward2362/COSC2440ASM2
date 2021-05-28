@@ -1,5 +1,8 @@
 package com.example.cosc2440asm2.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,9 +16,6 @@ public class Category {
 
     @Column
     private String name;
-
-    @OneToMany(mappedBy = "categoryId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Product> products;
 
     public Category() {
     }
@@ -34,13 +34,5 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
     }
 }

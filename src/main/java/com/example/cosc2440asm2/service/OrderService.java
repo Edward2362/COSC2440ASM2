@@ -19,36 +19,30 @@ public class OrderService {
 
     public List<Order> getAllOrders() {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "select Order"
+                "from Order"
         );
         return query.list();
     }
 
     public List<Order> getOrderById(int id) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "select Order where id=:id"
+                "from Order where id=:id"
         );
         query.setParameter("id", id);
         return query.list();
     }
 
     public int addOrder(Order order) {
-        Query query = sessionFactory.getCurrentSession().createQuery(
-                "insert into Order(date=:date, staffId=:staffId, providerId:providerId)"
-        );
-        query.setParameter("date", order.getDate());
-        query.setParameter("staffId", order.getStaffID());
-        query.setParameter("providerId", order.getProviderID());
-
         for (OrderDetail orderDetail : order.getOrderDetailList()) {
             orderDetail.setOrderId(order);
         }
-        return query.executeUpdate();
+        sessionFactory.getCurrentSession().save(order);
+        return order.getId();
     }
 
     public int updateOrder(int id, Order order) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "update Order date=:date, staffId=:staffId, providerId:providerId where id=:id"
+                "update Order set date=:date, staffID=:staffId, providerID=:providerId where id=:id"
         );
         query.setParameter("date", order.getDate());
         query.setParameter("staffId", order.getStaffID());
@@ -58,10 +52,8 @@ public class OrderService {
     }
 
     public int deleteOrder(int id) {
-        Query query = sessionFactory.getCurrentSession().createQuery(
-                "delete Order where id=:id"
-        );
-        query.setParameter("id", id);
-        return query.executeUpdate();
+        Order existedOrder = (Order) sessionFactory.getCurrentSession().get(Order.class, id);
+        sessionFactory.getCurrentSession().delete(existedOrder);
+        return existedOrder.getId();
     }
 }

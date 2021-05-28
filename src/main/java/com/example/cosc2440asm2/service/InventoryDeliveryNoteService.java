@@ -24,14 +24,14 @@ public class InventoryDeliveryNoteService {
 
     public List<InventoryDeliveryNote> getAllDeliveryNote() {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "select inventoryDeliveryNote"
+                "from InventoryDeliveryNote"
         );
         return query.list();
     }
 
     public List<InventoryDeliveryNote> getInventoryDeliveryNoteById(int id) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "select inventoryDeliveryNote where id=:id"
+                "from InventoryDeliveryNote where id=:id"
         );
         query.setParameter("id", id);
         return query.list();
@@ -47,7 +47,7 @@ public class InventoryDeliveryNoteService {
 
     public int updateInventoryDeliveryNote(int id, InventoryDeliveryNote deliveryNote) {
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "update deliveryNote date=:date, staffId=:staffId where id=:id"
+                "update InventoryDeliveryNote set date=:date, staffID=:staffId where id=:id"
         );
         query.setParameter("date", deliveryNote.getDate());
         query.setParameter("staffId", deliveryNote.getStaffID());
@@ -56,11 +56,9 @@ public class InventoryDeliveryNoteService {
     }
 
     public int deleteInventoryDeliveryNote(int id) {
-        Query query = sessionFactory.getCurrentSession().createQuery(
-                "delete deliveryNote where id=:id"
-        );
-        query.setParameter("id", id);
-        return query.executeUpdate();
+        InventoryDeliveryNote existedInventoryDeliveryNote = (InventoryDeliveryNote) sessionFactory.getCurrentSession().get(InventoryDeliveryNote.class, id);
+        sessionFactory.getCurrentSession().delete(existedInventoryDeliveryNote);
+        return existedInventoryDeliveryNote.getId();
     }
 
     public List<InventoryDeliveryNote> filterByDate(Date sDate, Date eDate){

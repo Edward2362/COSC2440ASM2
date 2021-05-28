@@ -1,6 +1,11 @@
 package com.example.cosc2440asm2.model;
 
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +20,7 @@ public class InventoryDeliveryNote extends Note {
 
     @OneToMany(mappedBy = "inventoryDeliveryNoteID", cascade = CascadeType.ALL, fetch =
             FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
     private List<DeliveryDetail> deliveryDetailList;
 
     public InventoryDeliveryNote() {

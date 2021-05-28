@@ -39,6 +39,7 @@ public class SaleInvoiceService {
 
     public int updateSaleInvoice(int saleInvoiceId, SaleInvoice saleInvoice) {
         SaleInvoice existedSaleInvoice = (SaleInvoice)sessionFactory.getCurrentSession().get(SaleInvoice.class, saleInvoiceId);
+        existedSaleInvoice.setTotalPrice(saleInvoice.getTotalPrice());
         existedSaleInvoice.setDate(saleInvoice.getDate());
         existedSaleInvoice.setCustomerID(saleInvoice.getCustomerID());
         existedSaleInvoice.setStaffID(saleInvoice.getStaffID());

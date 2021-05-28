@@ -13,7 +13,7 @@ public class ReceivingDetailController {
     public ReceivingDetailService receivingDetailService;
 
     @RequestMapping(value = "/receiveDetails", method = RequestMethod.GET)
-    public List<ReceivingDetail> getAllRecevingDetails(){
+    public List<ReceivingDetail> getAllReceivingDetails(){
         return  receivingDetailService.getAllReceivingDetails();
     }
 

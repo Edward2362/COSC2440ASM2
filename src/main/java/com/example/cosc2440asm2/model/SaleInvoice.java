@@ -16,6 +16,9 @@ public class SaleInvoice extends Note {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column
+    private int totalPrice;
+
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customerID;
@@ -49,6 +52,14 @@ public class SaleInvoice extends Note {
 
     public void setSaleDetailList(List<SaleDetail> saleDetailList) {
         this.saleDetailList = saleDetailList;
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     @Override

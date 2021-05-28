@@ -1,6 +1,9 @@
 package com.example.cosc2440asm2.model;
 
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,12 +21,13 @@ public class Order extends Note{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "providerId", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "providerId")
     private Provider providerID;
 
     @OneToMany(mappedBy = "orderID", cascade = CascadeType.ALL, fetch =
             FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
     private List<OrderDetail> orderDetailList;
 
     public Order() {

@@ -52,27 +52,32 @@ public class CustomerService {
 
     public List<Customer> getCustomerByEmail(String email) {
         Query query = sessionFactory.getCurrentSession().createQuery("from Customer where email=:email");
-        query.setParameter("name", email);
+        query.setParameter("email", email);
         return query.list();
     }
 
     public int addCustomer(Customer customer) {
-        Query query = sessionFactory.getCurrentSession().createQuery(
-                "insert into Customer(:customerName, :customerAddress, :customerPhone, :customerEmail, :customerFax, :customerContact)"
-        );
-        query.setParameter("customerName", customer.getName());
-        query.setParameter("customerAddress", customer.getAddress());
-        query.setParameter("customerPhone", customer.getPhone());
-        query.setParameter("customerEmail", customer.getEmail());
-        query.setParameter("customerFax", customer.getFax());
-        query.setParameter("customerContact", customer.getContactPerson());
-
-        for (SaleInvoice saleInvoice : customer.getSaleInvoiceId()) {
-            saleInvoice.setCustomerID(customer);
-        }
-
-        return query.executeUpdate();
+        sessionFactory.getCurrentSession().save(customer);
+        return customer.getId();
     }
+
+//    public int addCustomer(Customer customer) {
+//        Query query = sessionFactory.getCurrentSession().createQuery(
+//                "insert into Customer(:customerName, :customerAddress, :customerPhone, :customerEmail, :customerFax, :customerContact)"
+//        );
+//        query.setParameter("customerName", customer.getName());
+//        query.setParameter("customerAddress", customer.getAddress());
+//        query.setParameter("customerPhone", customer.getPhone());
+//        query.setParameter("customerEmail", customer.getEmail());
+//        query.setParameter("customerFax", customer.getFax());
+//        query.setParameter("customerContact", customer.getContactPerson());
+//
+////        for (SaleInvoice saleInvoice : customer.getSaleInvoiceId()) {
+////            saleInvoice.setCustomerID(customer);
+////        }
+//
+//        return query.executeUpdate();
+//    }
 
     public int updateCustomer(int id, Customer customer) {
         Query query = sessionFactory.getCurrentSession().createQuery(
@@ -89,10 +94,18 @@ public class CustomerService {
     }
 
     public int deleteCustomer(int id) {
-        Query query = sessionFactory.getCurrentSession().createQuery(
-                "delete Customer c where c.id=:id"
-        );
-        query.setParameter("id", id);
-        return query.executeUpdate();
+        Customer existedCustomer = sessionFactory.getCurrentSession().get(Customer.class, id);
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(SaleInvoice.class);
+        for (Object object: criteria.list()){
+            SaleInvoice saleInvoice = (SaleInvoice) object;
+            if (saleInvoice.getCustomerID() != null) {
+                if (saleInvoice.getCustomerID().getId() == id) {
+                    saleInvoice.setCustomerID(null);
+                    sessionFactory.getCurrentSession().update(saleInvoice);
+                }
+            }
+        }
+        sessionFactory.getCurrentSession().delete(existedCustomer);
+        return existedCustomer.getId();
     }
 }

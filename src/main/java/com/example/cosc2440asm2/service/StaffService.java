@@ -1,6 +1,6 @@
 package com.example.cosc2440asm2.service;
 
-import com.example.cosc2440asm2.model.Staff;
+import com.example.cosc2440asm2.model.*;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -52,12 +52,50 @@ public class StaffService {
         return query.executeUpdate();
     }
 
-  public int deleteStaff(int id){
-        Query query = sessionFactory.getCurrentSession().createQuery(
-                "delete Staff where id=:id"
-        );
-        query.setParameter("id", id);
-        return query.executeUpdate();
+    public int deleteStaff(int id){
+        Staff existedStaff = sessionFactory.getCurrentSession().get(Staff.class, id);
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(SaleInvoice.class);
+        for (Object object: criteria.list()){
+            SaleInvoice saleInvoice = (SaleInvoice) object;
+            if (saleInvoice.getStaffID() != null) {
+                if (saleInvoice.getStaffID().getId() == id) {
+                    saleInvoice.setStaffID(null);
+                    sessionFactory.getCurrentSession().update(saleInvoice);
+                }
+            }
+        }
+        criteria = sessionFactory.getCurrentSession().createCriteria(InventoryDeliveryNote.class);
+        for (Object object: criteria.list()){
+            InventoryDeliveryNote inventoryDeliveryNote = (InventoryDeliveryNote) object;
+            if (inventoryDeliveryNote.getStaffID() != null){
+                if (inventoryDeliveryNote.getStaffID().getId() == id){
+                    inventoryDeliveryNote.setStaffID(null);
+                    sessionFactory.getCurrentSession().update(inventoryDeliveryNote);
+                }
+            }
+        }
+        criteria = sessionFactory.getCurrentSession().createCriteria(InventoryReceiveNote.class);
+        for (Object object: criteria.list()){
+            InventoryReceiveNote inventoryReceiveNote = (InventoryReceiveNote) object;
+            if (inventoryReceiveNote.getStaffID() != null){
+                if (inventoryReceiveNote.getStaffID().getId() == id){
+                    inventoryReceiveNote.setStaffID(null);
+                    sessionFactory.getCurrentSession().update(inventoryReceiveNote);
+                }
+            }
+        }
+        criteria = sessionFactory.getCurrentSession().createCriteria(Order.class);
+        for (Object object: criteria.list()){
+            Order order = (Order) object;
+            if (order.getStaffID() != null){
+                if (order.getStaffID().getId() == id){
+                    order.setStaffID(null);
+                    sessionFactory.getCurrentSession().update(order);
+                }
+            }
+        }
+        sessionFactory.getCurrentSession().delete(existedStaff);
+        return existedStaff.getId();
     }
 
 }

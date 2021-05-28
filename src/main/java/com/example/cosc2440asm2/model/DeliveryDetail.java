@@ -1,6 +1,8 @@
 package com.example.cosc2440asm2.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -15,7 +17,8 @@ public class DeliveryDetail extends NoteDetail{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "inventory_delivery_note_id", nullable = false)
     private InventoryDeliveryNote inventoryDeliveryNoteID;
 

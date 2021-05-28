@@ -1,6 +1,8 @@
 package com.example.cosc2440asm2.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.*;
@@ -17,7 +19,8 @@ public class OrderDetail extends NoteDetail{
     @Column
     private int price;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", nullable = false)
     private Order orderID;
 

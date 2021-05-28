@@ -18,7 +18,7 @@ public class ProductController {
     }
 
 
-    @RequestMapping(value = "/products/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
     public List<Product> getProductById(@PathVariable(name = "id") int id) {
         return productService.getProductById(id);
     }
@@ -28,12 +28,12 @@ public class ProductController {
         return productService.addProduct(product);
     }
 
-    @RequestMapping(value = "/products/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/product/{id}", method = RequestMethod.PUT)
     public int updateProduct(@RequestBody Product product, @PathVariable(name = "id") int id) {
         return productService.updateProduct(id, product);
     }
 
-    @RequestMapping(value = "/products/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/product/{id}", method = RequestMethod.DELETE)
     public int deleteProduct(@PathVariable(name = "id") int id) {
         return productService.deleteProduct(id);
     }

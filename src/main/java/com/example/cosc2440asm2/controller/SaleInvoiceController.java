@@ -1,13 +1,11 @@
 package com.example.cosc2440asm2.controller;
 
-import com.example.cosc2440asm2.model.SaleDetail;
 import com.example.cosc2440asm2.model.SaleInvoice;
 import com.example.cosc2440asm2.service.SaleInvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 
