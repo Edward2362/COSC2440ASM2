@@ -33,23 +33,9 @@ public class InventoryDeliveryNoteService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "select inventoryDeliveryNote where id=:id"
         );
-        query.setString("id", "%" + id + "%");
+        query.setParameter("id", id);
         return query.list();
     }
-
-//    public int addInventoryDeliveryNote(InventoryDeliveryNote deliveryNote) {
-//        Query query = sessionFactory.getCurrentSession().createQuery(
-//                "insert into deliveryNote(date=:date, staffId=:staffId)"
-//        );
-//        query.setString("date", "&" + deliveryNote.getDate() + "%");
-//        query.setString("staffId", "&" + deliveryNote.getStaffID() + "%");
-//
-//        for (DeliveryDetail deliveryDetail : deliveryNote.getDeliveryDetailList()){
-//            deliveryDetail.setInventoryDeliveryNoteID(deliveryNote);
-//        }
-//
-//        return query.executeUpdate();
-//    }
 
     public int addInventoryDeliveryNote(InventoryDeliveryNote inventoryDeliveryNote) {
         for(DeliveryDetail deliveryDetail: inventoryDeliveryNote.getDeliveryDetailList()){
@@ -63,22 +49,17 @@ public class InventoryDeliveryNoteService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "update deliveryNote date=:date, staffId=:staffId where id=:id"
         );
-        query.setString("date", "&" + deliveryNote.getDate() + "%");
-        query.setString("staffId", "&" + deliveryNote.getStaffID() + "%");
-        query.setString("id", "&" + id + "%");
-
-
-
+        query.setParameter("date", deliveryNote.getDate());
+        query.setParameter("staffId", deliveryNote.getStaffID());
+        query.setParameter("id", id);
         return query.executeUpdate();
     }
 
-    public int deleteInventoryDeliveryNote
-            (int id) {
+    public int deleteInventoryDeliveryNote(int id) {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "delete deliveryNote where id=:id"
         );
-        query.setString("id", "&" + id + "%");
-
+        query.setParameter("id", id);
         return query.executeUpdate();
     }
 

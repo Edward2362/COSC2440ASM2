@@ -29,7 +29,7 @@ public class StaffService {
 
     public List<Staff> getStaffById(int id){
         Query query = sessionFactory.getCurrentSession().createQuery("from Staff where id=:id");
-        query.setString("id", "%"+id+"%");
+        query.setParameter("id", id);
         return query.list();
     }
 
@@ -38,50 +38,25 @@ public class StaffService {
         return staff.getId();
     }
 
-//    public List<Staff> getAllStaffs(){
-//        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Staff.class);
-//        return criteria.list();
-//    }
-//
-//    public int updateStaff(int staffId, Staff staff){
-//        Staff existedStaff = (Staff) sessionFactory.getCurrentSession().get(Staff.class, staffId);
-//        existedStaff.setAddress(staff.getAddress());
-//        existedStaff.setEmail(staff.getEmail());
-//        existedStaff.setName(staff.getName());
-//        existedStaff.setPhone(staff.getPhone());
-//        sessionFactory.getCurrentSession().update(existedStaff);
-//        return existedStaff.getId();
-//    }
-//
-//    public Staff getStaffById(int staffId) {
-//        return (Staff) sessionFactory.getCurrentSession().get(Staff.class, staffId);
-//    }
-//
-//    public int deleteStaff(int staffId) {
-//        Staff existedStaff = (Staff) sessionFactory.getCurrentSession().get(Staff.class, staffId);
-//
-//        sessionFactory.getCurrentSession().delete(existedStaff);
-//        return existedStaff.getId();
-//    }
 
     public int updateStaff(int id, Staff staff){
         String strId = String.valueOf(id);
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "update Staff set name=:staffName, address=:staffAddress, phone=:staffPhone, email=:staffEmail where id=:id"
+                "update Staff set name = :staffName, address = :staffAddress, phone = :staffPhone, email = :staffEmail where id = :id"
         );
-        query.setString("id", "%" + id + "%");
-        query.setString("staffName", "%" + staff.getName() + "%");
-        query.setString("staffAddress", "%" + staff.getAddress() + "%");
-        query.setString("staffPhone", "%" + staff.getPhone() + "%");
-        query.setString("staffEmail", "%" + staff.getEmail() + "%");
+        query.setParameter("id", id);
+        query.setParameter("staffName", staff.getName());
+        query.setParameter("staffAddress", staff.getAddress());
+        query.setParameter("staffPhone", staff.getPhone());
+        query.setParameter("staffEmail", staff.getEmail());
         return query.executeUpdate();
     }
-//
-    public int deleteStaff(int id){
+
+  public int deleteStaff(int id){
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "delete Staff where id=:id"
         );
-        query.setString("id", "%"+id+"%");
+        query.setParameter("id", id);
         return query.executeUpdate();
     }
 

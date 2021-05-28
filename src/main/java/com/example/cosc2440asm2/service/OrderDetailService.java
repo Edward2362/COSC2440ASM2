@@ -26,7 +26,7 @@ public class OrderDetailService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "select orderDetail where id=:id"
         );
-        query.setString("id", "%"+id+"%");
+        query.setParameter("id", id);
         return query.list();
     }
 
@@ -34,9 +34,9 @@ public class OrderDetailService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "insert into orderDetail(productId=:productId, quantity=:quantity, price=:price)"
         );
-        query.setString("productId", "&"+orderDetail.getProductID()+"%");
-        query.setString("quantity", "&"+orderDetail.getQuantity()+"%");
-        query.setString("price", "&"+orderDetail.getPrice()+"%");
+        query.setParameter("productId", orderDetail.getProductID());
+        query.setParameter("quantity", orderDetail.getQuantity());
+        query.setParameter("price", orderDetail.getPrice());
 
         return query.executeUpdate();
     }
@@ -45,10 +45,10 @@ public class OrderDetailService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "update orderDetail productId=:productId, quantity=:quantity, price=:price where id=:id"
         );
-        query.setString("productId", "&"+orderDetail.getProductID()+"%");
-        query.setString("quantity", "&"+orderDetail.getQuantity()+"%");
-        query.setString("price", "&"+orderDetail.getPrice()+"%");
-        query.setString("id", "&"+id+"%");
+        query.setParameter("productId", orderDetail.getProductID());
+        query.setParameter("quantity", orderDetail.getQuantity());
+        query.setParameter("price", orderDetail.getPrice());
+        query.setParameter("id", id);
 
         return query.executeUpdate();
     }
@@ -57,7 +57,7 @@ public class OrderDetailService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "delete orderDetail where id=:id"
         );
-        query.setString("id", "&"+id+"%");
+        query.setParameter("id", id);
 
         return query.executeUpdate();
     }

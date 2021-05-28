@@ -1,9 +1,9 @@
 package com.example.cosc2440asm2.controller;
 
 import com.example.cosc2440asm2.model.Category;
-import com.example.cosc2440asm2.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.example.cosc2440asm2.service.CategoryService;
 
 import java.util.List;
 
@@ -18,8 +18,9 @@ public class CategoryController {
         return categoryService.getAllCategories();
     }
 
-    @RequestMapping(value = "/categorie", method = RequestMethod.GET)
-    public List<Category> getCategoryById(@RequestParam(name = "id") int id) {
+
+    @RequestMapping(value = "/categories/{id}", method = RequestMethod.GET)
+    public List<Category> getCategoryById(@PathVariable(name = "id") int id) {
         return categoryService.getCategoryById(id);
     }
 
@@ -28,13 +29,13 @@ public class CategoryController {
         return categoryService.addCategory(category);
     }
 
-    @RequestMapping(value = "/categorie", method = RequestMethod.PUT)
-    public int updateCategory(@RequestBody Category category, @RequestParam(name = "id") int id) {
+    @RequestMapping(value = "/categories/{id}", method = RequestMethod.PUT)
+    public int updateCategory(@RequestBody Category category, @PathVariable(name = "id") int id) {
         return categoryService.updateCategory(id, category);
     }
 
-    @RequestMapping(value = "/categorie", method = RequestMethod.DELETE)
-    public int deleteCategory(@RequestParam(name = "id") int id) {
+    @RequestMapping(value = "/categories/{id}", method = RequestMethod.DELETE)
+    public int deleteCategory(@PathVariable(name = "id") int id) {
         return categoryService.deleteCategory(id);
     }
 

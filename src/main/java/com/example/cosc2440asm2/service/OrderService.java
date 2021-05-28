@@ -28,7 +28,7 @@ public class OrderService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "select Order where id=:id"
         );
-        query.setString("id", "%" + id + "%");
+        query.setParameter("id", id);
         return query.list();
     }
 
@@ -36,9 +36,9 @@ public class OrderService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "insert into Order(date=:date, staffId=:staffId, providerId:providerId)"
         );
-        query.setString("date", "%" + order.getDate() + "%");
-        query.setString("staffId", "%" + order.getStaffID() + "%");
-        query.setString("providerId", "%" + order.getProviderID() + "%");
+        query.setParameter("date", order.getDate());
+        query.setParameter("staffId", order.getStaffID());
+        query.setParameter("providerId", order.getProviderID());
 
         for (OrderDetail orderDetail : order.getOrderDetailList()) {
             orderDetail.setOrderId(order);
@@ -50,10 +50,10 @@ public class OrderService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "update Order date=:date, staffId=:staffId, providerId:providerId where id=:id"
         );
-        query.setString("date", "%" + order.getDate() + "%");
-        query.setString("staffId", "%" + order.getStaffID() + "%");
-        query.setString("providerId", "%" + order.getProviderID() + "%");
-        query.setString("id", "%" + id + "%");
+        query.setParameter("date", order.getDate());
+        query.setParameter("staffId", order.getStaffID());
+        query.setParameter("providerId", order.getProviderID());
+        query.setParameter("id", id);
         return query.executeUpdate();
     }
 
@@ -61,7 +61,7 @@ public class OrderService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "delete Order where id=:id"
         );
-        query.setString("id", "%" + id + "%");
+        query.setParameter("id", id);
         return query.executeUpdate();
     }
 }

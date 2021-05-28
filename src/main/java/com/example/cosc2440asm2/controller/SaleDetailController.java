@@ -22,18 +22,18 @@ public class SaleDetailController {
 //        return saleDetailService.addSaleDetail(saleDetail);
 //    }
 
-    @RequestMapping(value = "/saleDetail", method = RequestMethod.PUT)
-    public int updateSaleDetail(@RequestBody SaleDetail saleDetail, @RequestParam(name = "id") int id) {
+    @RequestMapping(value = "/saleDetail/{id}", method = RequestMethod.PUT)
+    public int updateSaleDetail(@RequestBody SaleDetail saleDetail, @PathVariable(name = "id") int id) {
         return saleDetailService.updateSaleDetail(id, saleDetail);
     }
 
-    @RequestMapping(value = "/saleDetail", method = RequestMethod.DELETE)
-    public int deleteSaleDetail(@RequestParam(name = "id") int id) {
+    @RequestMapping(value = "/saleDetail/{id}", method = RequestMethod.DELETE)
+    public int deleteSaleDetail(@PathVariable(name = "id") int id) {
         return saleDetailService.deleteSaleDetail(id);
     }
 
-    @RequestMapping(value = "/saleDetail", method = RequestMethod.GET)
-    public SaleDetail getSaleDetailById(@RequestParam(name = "id") int id) {
+    @RequestMapping(value = "/saleDetail/{id}", method = RequestMethod.GET)
+    public SaleDetail getSaleDetailById(@PathVariable(name = "id") int id) {
         return saleDetailService.getSaleDetailId(id);
     }
 }
