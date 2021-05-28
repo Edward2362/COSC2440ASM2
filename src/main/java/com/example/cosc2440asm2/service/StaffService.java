@@ -28,33 +28,25 @@ public class StaffService {
 
     public List<Staff> getStaffById(int id){
         Query query = sessionFactory.getCurrentSession().createQuery("from Staff where id=:id");
-        query.setString("id", "%"+id+"%");
+        query.setParameter("id", id);
         return query.list();
     }
 
     public int addStaff(Staff staff){
-//        Query query = sessionFactory.getCurrentSession().createQuery(
-//                "insert into Staff(:staffName, :staffAddress, :staffPhone, :staffEmail)"
-//        );
-//        query.setString("staffName", "%" + staff.getName() + "%");
-//        query.setString("staffAddress", "%" + staff.getAddress() + "%");
-//        query.setString("staffPhone", "%" + staff.getPhone() + "%");
-//        query.setString("staffEmail", "%" + staff.getEmail() + "%");
-//
-//        return query.executeUpdate();
         this.sessionFactory.getCurrentSession().save(staff);
         return staff.getId();
     }
 
     public int updateStaff(int id, Staff staff){
         Query query = sessionFactory.getCurrentSession().createQuery(
-                "update Staff set name=:staffName, address=:staffAddress, phone=:staffPhone, email=:staffEmail where id=:id"
+                "update Staff set name = :staffName, address = :staffAddress, phone = :staffPhone, email = :staffEmail where id = :id"
         );
-        query.setString("id", "%" + id + "%");
-        query.setString("staffName", "%" + staff.getName() + "%");
-        query.setString("staffAddress", "%" + staff.getAddress() + "%");
-        query.setString("staffPhone", "%" + staff.getPhone() + "%");
-        query.setString("staffEmail", "%" + staff.getEmail() + "%");
+//        query.setParameter()("id", "%" + String.valueOf(id) + "%");
+        query.setParameter("id", id);
+        query.setParameter("staffName", staff.getName());
+        query.setParameter("staffAddress", staff.getAddress());
+        query.setParameter("staffPhone", staff.getPhone());
+        query.setParameter("staffEmail", staff.getEmail());
         return query.executeUpdate();
     }
 
@@ -62,7 +54,7 @@ public class StaffService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "delete Staff where id=:id"
         );
-        query.setString("id", "%"+id+"%");
+        query.setParameter("id", id);
         return query.executeUpdate();
     }
 

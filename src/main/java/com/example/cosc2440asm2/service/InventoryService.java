@@ -33,8 +33,8 @@ public class InventoryService {
                         "\tinner join inventoryrecevenote irn on irn.id = r.receiving_note_id\n" +
                         "\twhere idn.date >= :startDate and idn.date < :endDate and irn.date >= :startDate and irn.date < :endDate\n"
         );
-        query.setString("startDate", "%"+startDate+"%");
-        query.setString("endDate", "%"+endDate+"%");
+        query.setParameter("startDate", startDate);
+        query.setParameter("endDate", endDate);
         return query.list();
     }
 }

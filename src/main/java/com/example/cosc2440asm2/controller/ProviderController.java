@@ -18,8 +18,8 @@ public class ProviderController {
         return providerService.getAllProviders();
     }
 
-    @RequestMapping(value = "/provider", method= RequestMethod.GET)
-    public List<Provider> getProviderById(@RequestParam(name="id") int id){
+    @RequestMapping(value = "/providers/{id}", method= RequestMethod.GET)
+    public List<Provider> getProviderById(@PathVariable(name="id") int id){
         return providerService.getProviderById(id);
     }
 
@@ -28,13 +28,13 @@ public class ProviderController {
         return providerService.addProvider(provider);
     }
 
-    @RequestMapping(value="/providers", method=RequestMethod.PUT)
-    public int updateProvider(@RequestParam(name="id") int id, @RequestBody Provider provider){
+    @RequestMapping(value="/providers/{id}", method=RequestMethod.PUT)
+    public int updateProvider(@PathVariable(name="id") int id, @RequestBody Provider provider){
         return providerService.updateProvider(id, provider);
     }
 
-    @RequestMapping(value="/providers", method=RequestMethod.DELETE)
-    public int deleteProvider(@RequestParam(name="id") int id){
+    @RequestMapping(value="/providers/{id}", method=RequestMethod.DELETE)
+    public int deleteProvider(@PathVariable(name="id") int id){
         return providerService.deleteProvider(id);
     }
 

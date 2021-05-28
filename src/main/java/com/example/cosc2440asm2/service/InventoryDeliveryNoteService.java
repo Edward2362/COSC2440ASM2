@@ -31,7 +31,7 @@ public class InventoryDeliveryNoteService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "select inventoryDeliveryNote where id=:id"
         );
-        query.setString("id", "%" + id + "%");
+        query.setParameter("id", id);
         return query.list();
     }
 
@@ -39,8 +39,8 @@ public class InventoryDeliveryNoteService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "insert into deliveryNote(date=:date, staffId=:staffId)"
         );
-        query.setString("date", "&" + deliveryNote.getDate() + "%");
-        query.setString("staffId", "&" + deliveryNote.getStaffID() + "%");
+        query.setParameter("date", deliveryNote.getDate());
+        query.setParameter("staffId", deliveryNote.getStaffID());
 
         for (DeliveryDetail deliveryDetail : deliveryNote.getDeliveryDetailList()){
             deliveryDetail.setInventoryDeliveryNoteID(deliveryNote);
@@ -53,9 +53,9 @@ public class InventoryDeliveryNoteService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "update deliveryNote date=:date, staffId=:staffId where id=:id"
         );
-        query.setString("date", "&" + deliveryNote.getDate() + "%");
-        query.setString("staffId", "&" + deliveryNote.getStaffID() + "%");
-        query.setString("id", "&" + id + "%");
+        query.setParameter("date", deliveryNote.getDate());
+        query.setParameter("staffId", deliveryNote.getStaffID());
+        query.setParameter("id", id);
 
 
 
@@ -67,7 +67,7 @@ public class InventoryDeliveryNoteService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "delete deliveryNote where id=:id"
         );
-        query.setString("id", "&" + id + "%");
+        query.setParameter("id", id);
 
         return query.executeUpdate();
     }

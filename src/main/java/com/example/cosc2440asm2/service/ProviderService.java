@@ -26,7 +26,7 @@ public class ProviderService {
 
     public List<Provider> getProviderById(int id){
         Query query = sessionFactory.getCurrentSession().createQuery("from Provider where id=:id");
-        query.setString("id", "%"+id+"%");
+        query.setParameter("id", id);
         return query.list();
     }
 
@@ -34,12 +34,12 @@ public class ProviderService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "insert into Provider(:providerName, :providerAddress, :providerPhone, :providerEmail, :providerFax, :providerContact)"
         );
-        query.setString("providerName", "%" + provider.getName() + "%");
-        query.setString("providerAddress", "%" + provider.getAddress() + "%");
-        query.setString("providerPhone", "%" + provider.getPhone() + "%");
-        query.setString("providerEmail", "%" + provider.getEmail() + "%");
-        query.setString("providerFax", "%" + provider.getFax() + "%");
-        query.setString("providerContact", "%" + provider.getContactPerson() + "%");
+        query.setParameter("providerName", provider.getName());
+        query.setParameter("providerAddress", provider.getAddress());
+        query.setParameter("providerPhone", provider.getPhone());
+        query.setParameter("providerEmail", provider.getEmail());
+        query.setParameter("providerFax", provider.getFax());
+        query.setParameter("providerContact", provider.getContactPerson());
         return query.executeUpdate();
     }
 
@@ -47,13 +47,13 @@ public class ProviderService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "update Provider set name=:providerName, address=:providerAddress, phone=:providerPhone, email=:providerEmail, fax=:providerFax, contactPerson=:providerContact where id=:id"
         );
-        query.setString("id", "%" + id + "%");
-        query.setString("providerName", "%" + provider.getName() + "%");
-        query.setString("providerAddress", "%" + provider.getAddress() + "%");
-        query.setString("providerPhone", "%" + provider.getPhone() + "%");
-        query.setString("providerEmail", "%" + provider.getEmail() + "%");
-        query.setString("providerFax", "%" + provider.getFax() + "%");
-        query.setString("providerContact", "%" + provider.getContactPerson() + "%");
+        query.setParameter("id", id);
+        query.setParameter("providerName", provider.getName());
+        query.setParameter("providerAddress", provider.getAddress());
+        query.setParameter("providerPhone", provider.getPhone());
+        query.setParameter("providerEmail", provider.getEmail());
+        query.setParameter("providerFax", provider.getFax());
+        query.setParameter("providerContact", provider.getContactPerson());
         return query.executeUpdate();
     }
 
@@ -61,7 +61,7 @@ public class ProviderService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "delete Provider c where c.id=:id"
         );
-        query.setString("id", "%"+id+"%");
+        query.setParameter("id", id);
         return query.executeUpdate();
     }
 }

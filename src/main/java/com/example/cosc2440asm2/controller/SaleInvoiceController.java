@@ -24,18 +24,18 @@ public class SaleInvoiceController {
         return saleInvoiceService.addSaleInvoice(saleInvoice);
     }
 
-    @RequestMapping(value = "/saleInvoice", method = RequestMethod.PUT)
-    public int updateSaleInvoice(@RequestBody SaleInvoice saleInvoice, @RequestParam(name = "id") int id) {
+    @RequestMapping(value = "/saleInvoice/{id}", method = RequestMethod.PUT)
+    public int updateSaleInvoice(@RequestBody SaleInvoice saleInvoice, @PathVariable(name = "id") int id) {
         return saleInvoiceService.updateSaleInvoice(id, saleInvoice);
     }
 
-    @RequestMapping(value = "/saleInvoice", method = RequestMethod.DELETE)
-    public int deleteSaleInvoice(@RequestParam(name = "id") int id) {
+    @RequestMapping(value = "/saleInvoice/{id}", method = RequestMethod.DELETE)
+    public int deleteSaleInvoice(@PathVariable(name = "id") int id) {
         return saleInvoiceService.deleteSaleInvoice(id);
     }
 
-    @RequestMapping(value = "/saleInvoice", method = RequestMethod.GET)
-    public SaleInvoice getSaleInvoiceById(@RequestParam(name = "id") int id) {
+    @RequestMapping(value = "/saleInvoice/{id}", method = RequestMethod.GET)
+    public SaleInvoice getSaleInvoiceById(@PathVariable(name = "id") int id) {
         return saleInvoiceService.getSaleInvoiceById(id);
     }
 }

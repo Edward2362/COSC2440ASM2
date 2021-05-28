@@ -18,8 +18,8 @@ public class CategoryController {
         return categoryService.getAllCategories();
     }
 
-    @RequestMapping(value = "/category", method = RequestMethod.GET)
-    public List<Category> getCategoryById(@RequestParam(name = "id") int id) {
+    @RequestMapping(value = "/categories/{id}", method = RequestMethod.GET)
+    public List<Category> getCategoryById(@PathVariable(name = "id") int id) {
         return categoryService.getCategoryById(id);
     }
 
@@ -28,13 +28,13 @@ public class CategoryController {
         return categoryService.addCategory(category);
     }
 
-    @RequestMapping(value = "/categories", method = RequestMethod.PUT)
-    public int updateCategory(@RequestBody Category category, @RequestParam(name = "id") int id) {
+    @RequestMapping(value = "/categories/{id}", method = RequestMethod.PUT)
+    public int updateCategory(@RequestBody Category category, @PathVariable(name = "id") int id) {
         return categoryService.updateCategory(id, category);
     }
 
-    @RequestMapping(value = "/categories", method = RequestMethod.DELETE)
-    public int deleteCategory(@RequestParam(name = "id") int id) {
+    @RequestMapping(value = "/categories/{id}", method = RequestMethod.DELETE)
+    public int deleteCategory(@PathVariable(name = "id") int id) {
         return categoryService.deleteCategory(id);
     }
 

@@ -30,25 +30,25 @@ public class CustomerService {
 
     public List<Customer> getCustomerById(int id) {
         Query query = sessionFactory.getCurrentSession().createQuery("from Customer where id=:id");
-        query.setString("id", "%" + id + "%");
+        query.setParameter("id", id);
         return query.list();
     }
 
     public List<Customer> getCustomerByName(String name) {
         Query query = sessionFactory.getCurrentSession().createQuery("from Customer where name=:name");
-        query.setString("name", "%" + name + "%");
+        query.setParameter("name", name);
         return query.list();
     }
 
     public List<Customer> getCustomerByPhone(String phone) {
         Query query = sessionFactory.getCurrentSession().createQuery("from Customer where phone=:phone");
-        query.setString("phone", "%" + phone + "%");
+        query.setParameter("phone", phone);
         return query.list();
     }
 
     public List<Customer> getCustomerByEmail(String email) {
         Query query = sessionFactory.getCurrentSession().createQuery("from Customer where email=:email");
-        query.setString("name", "%" + email + "%");
+        query.setParameter("name", email);
         return query.list();
     }
 
@@ -56,12 +56,12 @@ public class CustomerService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "insert into Customer(:customerName, :customerAddress, :customerPhone, :customerEmail, :customerFax, :customerContact)"
         );
-        query.setString("customerName", "%" + customer.getName() + "%");
-        query.setString("customerAddress", "%" + customer.getAddress() + "%");
-        query.setString("customerPhone", "%" + customer.getPhone() + "%");
-        query.setString("customerEmail", "%" + customer.getEmail() + "%");
-        query.setString("customerFax", "%" + customer.getFax() + "%");
-        query.setString("customerContact", "%" + customer.getContactPerson() + "%");
+        query.setParameter("customerName", customer.getName());
+        query.setParameter("customerAddress", customer.getAddress());
+        query.setParameter("customerPhone", customer.getPhone());
+        query.setParameter("customerEmail", customer.getEmail());
+        query.setParameter("customerFax", customer.getFax());
+        query.setParameter("customerContact", customer.getContactPerson());
 
         for (SaleInvoice saleInvoice : customer.getSaleInvoiceId()) {
             saleInvoice.setCustomerID(customer);
@@ -74,13 +74,13 @@ public class CustomerService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "update Customer set name=:customerName, address=:customerAddress, phone=:customerPhone, email=:customerEmail, fax=:customerFax, contactPerson=:customerContact where id=:id"
         );
-        query.setString("id", "%" + id + "%");
-        query.setString("customerName", "%" + customer.getName() + "%");
-        query.setString("customerAddress", "%" + customer.getAddress() + "%");
-        query.setString("customerPhone", "%" + customer.getPhone() + "%");
-        query.setString("customerEmail", "%" + customer.getEmail() + "%");
-        query.setString("customerFax", "%" + customer.getFax() + "%");
-        query.setString("customerContact", "%" + customer.getContactPerson() + "%");
+        query.setParameter("id", id);
+        query.setParameter("customerName", customer.getName());
+        query.setParameter("customerAddress", customer.getAddress());
+        query.setParameter("customerPhone", customer.getPhone());
+        query.setParameter("customerEmail", customer.getEmail());
+        query.setParameter("customerFax", customer.getFax());
+        query.setParameter("customerContact", customer.getContactPerson());
         return query.executeUpdate();
     }
 
@@ -88,7 +88,7 @@ public class CustomerService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "delete Customer c where c.id=:id"
         );
-        query.setString("id", "%" + id + "%");
+        query.setParameter("id", id);
         return query.executeUpdate();
     }
 }

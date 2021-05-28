@@ -30,7 +30,7 @@ public class RevenueService {
                         "\tinner join saledetail sd on sd.sale_invoice_id = si.id\n" +
                         "\twhere c.id = :id"
         );
-        query.setString("id", "%" + String.valueOf(id) + "%");
+        query.setParameter("id", id);
 
         return query.list();
     }
@@ -43,7 +43,7 @@ public class RevenueService {
                         "\tinner join saledetail sd on sd.sale_invoice_id = si.id\n" +
                         "\twhere s.id = :id"
         );
-        query.setString("id", "%" + String.valueOf(id) + "%");
+        query.setParameter("id", id);
         return query.list();
     }
 }

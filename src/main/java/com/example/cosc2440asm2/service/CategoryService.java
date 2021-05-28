@@ -23,7 +23,7 @@ public class CategoryService {
 
     public List<Category> getCategoryById(int id) {
         Query query = sessionFactory.getCurrentSession().createQuery("from Category c where c.id like :id");
-        query.setString("id", "%" + id + "%");
+        query.setParameter("id", id);
         return query.list();
     }
 
@@ -34,8 +34,8 @@ public class CategoryService {
         for (Product product : category.getProducts()) {
             product.setCategory(category);
         }
-        query.setString("categoryId", "%" + category.getId() + "%");
-        query.setString("categoryName", "%" + category.getName() + "%");
+        query.setParameter("categoryId", category.getId());
+        query.setParameter("categoryName", category.getName());
         return query.executeUpdate();
     }
 
@@ -43,9 +43,9 @@ public class CategoryService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "insert into Category(:categoryId, :categoryName where id=:id)"
         );
-        query.setString("id", "%" + id + "%");
-        query.setString("categoryId", "%" + category.getId() + "%");
-        query.setString("categoryName", "%" + category.getName() + "%");
+        query.setParameter("id", id);
+        query.setParameter("categoryId", category.getId());
+        query.setParameter("categoryName", category.getName());
 
         return query.executeUpdate();
     }
@@ -54,7 +54,7 @@ public class CategoryService {
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "delete Category where id=:id"
         );
-        query.setString("id", "%" + id + "%");
+        query.setParameter("id", id);
         return query.executeUpdate();
     }
 }

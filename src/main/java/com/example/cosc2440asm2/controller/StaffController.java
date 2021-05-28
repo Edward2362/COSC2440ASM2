@@ -17,8 +17,8 @@ public class StaffController {
         return staffService.getAllStaffs();
     }
 
-    @RequestMapping(value = "/staff", method = RequestMethod.GET)
-    public List<Staff> getStaffById(@RequestParam(name = "id") int id) {
+    @RequestMapping(value = "/staffs/{id}", method = RequestMethod.GET)
+    public List<Staff> getStaffById(@PathVariable(name = "id") int id) {
         return staffService.getStaffById(id);
     }
 
@@ -27,13 +27,13 @@ public class StaffController {
         return staffService.addStaff(staff);
     }
 
-    @RequestMapping(value = "/staffs", method = RequestMethod.PUT)
-    public int updateStaff(@RequestBody Staff staff, @RequestParam(name = "id") int id) {
+    @RequestMapping(value = "/staffs/{id}", method = RequestMethod.PUT)
+    public int updateStaff(@RequestBody Staff staff, @PathVariable(name = "id") int id) {
         return staffService.updateStaff(id, staff);
     }
 
-    @RequestMapping(value = "/staffs", method = RequestMethod.DELETE)
-    public int deleteStaff(@RequestParam(name = "id") int id) {
+    @RequestMapping(value = "/staffs/{id}", method = RequestMethod.DELETE)
+    public int deleteStaff(@PathVariable(name = "id") int id) {
         return staffService.deleteStaff(id);
     }
 
