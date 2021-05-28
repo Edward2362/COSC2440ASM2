@@ -22,6 +22,11 @@ public class StaffController {
         return staffService.getStaffById(id);
     }
 
+//    @RequestMapping(value = "/staff", method = RequestMethod.GET)
+//    public Staff getStaffById(@RequestParam(name = "id") int id) {
+//        return staffService.getStaffById(id);
+//    }
+
     @RequestMapping(value = "/staffs", method = RequestMethod.POST)
     public int addStaff(@RequestBody Staff staff) {
         return staffService.addStaff(staff);

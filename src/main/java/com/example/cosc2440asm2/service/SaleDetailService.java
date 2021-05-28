@@ -18,12 +18,12 @@ public class SaleDetailService {
 
     public void setSessionFactory(SessionFactory sessionFactory){this.sessionFactory=sessionFactory;}
 
-    public int addSaleDetail(SaleDetail saleDetail) {
-        System.out.println(saleDetail.getSaleInvoiceID());
-        saleDetail.getSaleInvoiceID().getSaleDetailList().add(saleDetail);
-        sessionFactory.getCurrentSession().save(saleDetail);
-        return saleDetail.getId();
-    }
+//    public int addSaleDetail(SaleDetail saleDetail) {
+//        System.out.println(saleDetail.getSaleInvoiceID());
+//        saleDetail.getSaleInvoiceID().getSaleDetailList().add(saleDetail);
+//        sessionFactory.getCurrentSession().save(saleDetail);
+//        return saleDetail.getId();
+//    }
 
     public int deleteSaleDetail(int saleDetailId) {
         SaleDetail existedSaleDetail = (SaleDetail) sessionFactory.getCurrentSession().get(SaleDetail.class, saleDetailId);

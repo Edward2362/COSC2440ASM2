@@ -23,9 +23,9 @@ public class SaleDetail extends NoteDetail{
     @Column
     private long totalValue;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sale_invoice_id", nullable = false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private SaleInvoice saleInvoiceID;
 
     public SaleDetail() {

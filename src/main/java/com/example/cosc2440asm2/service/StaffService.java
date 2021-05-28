@@ -1,6 +1,7 @@
 package com.example.cosc2440asm2.service;
 
 import com.example.cosc2440asm2.model.Staff;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,17 +34,38 @@ public class StaffService {
     }
 
     public int addStaff(Staff staff){
-        Query query = sessionFactory.getCurrentSession().createQuery(
-                "insert into Staff(:staffName, :staffAddress, :staffPhone, :staffEmail)"
-        );
-        query.setString("staffName", "%" + staff.getName() + "%");
-        query.setString("staffAddress", "%" + staff.getAddress() + "%");
-        query.setString("staffPhone", "%" + staff.getPhone() + "%");
-        query.setString("staffEmail", "%" + staff.getEmail() + "%");
-        return query.executeUpdate();
+        sessionFactory.getCurrentSession().save(staff);
+        return staff.getId();
     }
 
+//    public List<Staff> getAllStaffs(){
+//        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Staff.class);
+//        return criteria.list();
+//    }
+//
+//    public int updateStaff(int staffId, Staff staff){
+//        Staff existedStaff = (Staff) sessionFactory.getCurrentSession().get(Staff.class, staffId);
+//        existedStaff.setAddress(staff.getAddress());
+//        existedStaff.setEmail(staff.getEmail());
+//        existedStaff.setName(staff.getName());
+//        existedStaff.setPhone(staff.getPhone());
+//        sessionFactory.getCurrentSession().update(existedStaff);
+//        return existedStaff.getId();
+//    }
+//
+//    public Staff getStaffById(int staffId) {
+//        return (Staff) sessionFactory.getCurrentSession().get(Staff.class, staffId);
+//    }
+//
+//    public int deleteStaff(int staffId) {
+//        Staff existedStaff = (Staff) sessionFactory.getCurrentSession().get(Staff.class, staffId);
+//
+//        sessionFactory.getCurrentSession().delete(existedStaff);
+//        return existedStaff.getId();
+//    }
+
     public int updateStaff(int id, Staff staff){
+        String strId = String.valueOf(id);
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "update Staff set name=:staffName, address=:staffAddress, phone=:staffPhone, email=:staffEmail where id=:id"
         );
@@ -54,7 +76,7 @@ public class StaffService {
         query.setString("staffEmail", "%" + staff.getEmail() + "%");
         return query.executeUpdate();
     }
-
+//
     public int deleteStaff(int id){
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "delete Staff where id=:id"

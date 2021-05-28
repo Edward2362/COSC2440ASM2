@@ -1,8 +1,8 @@
 package com.example.cosc2440asm2.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+
 
 import javax.persistence.*;
 import java.util.Date;

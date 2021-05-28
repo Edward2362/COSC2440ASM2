@@ -17,10 +17,10 @@ public class SaleDetailController {
         return saleDetailService.getAllSaleDetails();
     }
 
-    @RequestMapping(value = "/saleDetails", method = RequestMethod.POST)
-    public int addSaleDetail(@RequestBody SaleDetail saleDetail) {
-        return saleDetailService.addSaleDetail(saleDetail);
-    }
+//    @RequestMapping(value = "/saleDetails", method = RequestMethod.POST)
+//    public int addSaleDetail(@RequestBody SaleDetail saleDetail) {
+//        return saleDetailService.addSaleDetail(saleDetail);
+//    }
 
     @RequestMapping(value = "/saleDetail", method = RequestMethod.PUT)
     public int updateSaleDetail(@RequestBody SaleDetail saleDetail, @RequestParam(name = "id") int id) {

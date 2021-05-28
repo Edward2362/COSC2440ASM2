@@ -1,7 +1,12 @@
 package com.example.cosc2440asm2.model;
 
+
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 import java.util.Date;
+
 
 @MappedSuperclass
 public abstract class Note {
