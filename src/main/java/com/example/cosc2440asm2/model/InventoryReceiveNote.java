@@ -21,7 +21,16 @@ public class InventoryReceiveNote extends Note{
     @Fetch(FetchMode.SELECT)
     private List<ReceivingDetail> receivingDetailList;
 
-    public InventoryReceiveNote(){};
+    public  InventoryReceiveNote(){};
+
+    public InventoryReceiveNote(List<ReceivingDetail> receivingDetailList) {
+        this.receivingDetailList = receivingDetailList;
+    }
+
+    public InventoryReceiveNote(Date date, List<ReceivingDetail> receivingDetailList) {
+        super(date);
+        this.receivingDetailList = receivingDetailList;
+    }
 
     public int getId() {
         return id;

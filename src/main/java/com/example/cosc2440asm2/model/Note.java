@@ -21,6 +21,13 @@ public abstract class Note {
     @JoinColumn(name = "staffId")
     private Staff staffID;
 
+    public Note() {
+    }
+
+    public Note(Date date) {
+        this.date = date;
+    }
+
     public Date getDate() {
         return date;
     }
