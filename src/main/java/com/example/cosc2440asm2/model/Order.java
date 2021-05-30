@@ -33,6 +33,10 @@ public class Order extends Note{
     public Order() {
     }
 
+    public Order(List<OrderDetail> orderDetailList) {
+        this.orderDetailList = orderDetailList;
+    }
+
     public int getId() {
         return id;
     }
