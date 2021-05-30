@@ -40,7 +40,7 @@ public class InventoryReceiveNoteController {
         return inventoryReceiveNoteService.deleteInventoryReceiveNote(id);
     }
 
-    @RequestMapping(value = "/receiveNoteDate/{sdate}/{eDate}", method = RequestMethod.GET)
+    @RequestMapping(value = "/receiveNoteDate/{sDate}/{eDate}", method = RequestMethod.GET)
     public List<InventoryReceiveNote> filterByDate(@PathVariable(name = "sDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date sDate, @PathVariable(name = "eDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date eDate){
         return inventoryReceiveNoteService.filterByDate(sDate, eDate);
     }

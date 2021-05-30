@@ -23,11 +23,6 @@ public class DeliveryDetailController {
         return deliveryDetailService.getDeliveryDetailById(id);
     }
 
-//    @RequestMapping(value = "/receivedetails", method = RequestMethod.POST)
-//    public int addReceivingDetail(@RequestBody ReceivingDetail receivingDetail){
-//        return receivingDetailService.addReceivingDetails(receivingDetail);
-//    }
-
     @RequestMapping(value = "/deliveryDetail/{id}", method = RequestMethod.PUT)
     public int updateDeliveryDetail(@RequestBody DeliveryDetail deliveryDetail, @PathVariable(name = "id") int id ){
         return deliveryDetailService.updateDeliveryDetail(id, deliveryDetail);

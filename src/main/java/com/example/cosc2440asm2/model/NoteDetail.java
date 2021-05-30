@@ -10,7 +10,7 @@ public abstract class NoteDetail {
     private Product productID;
 
     @Column
-    protected int quantity;
+    private int quantity;
 
     public NoteDetail() {
     }
