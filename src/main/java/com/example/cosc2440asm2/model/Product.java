@@ -37,6 +37,10 @@ public class Product {
     public Product() {
     }
 
+    public Product(String nName){
+        this.name = nName;
+    }
+
     public int getId() {
         return id;
     }

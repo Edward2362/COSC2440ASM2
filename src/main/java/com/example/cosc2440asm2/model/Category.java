@@ -20,6 +20,14 @@ public class Category {
     public Category() {
     }
 
+    public Category(String nname){
+        this.name = nname;
+    }
+
+    public String toString(){
+        return "CATEGORY " + this.id + " name " + this.name;
+    }
+
     public int getId() {
         return id;
     }

@@ -42,6 +42,9 @@ public class CategoryService {
     }
 
     public int updateCategory(int id, Category category) {
+
+        System.out.println("in UPDATE SERVICE, " + category.toString());
+
         Query query = sessionFactory.getCurrentSession().createQuery(
                 "update Category set name=:categoryName where id=:id"
         );
