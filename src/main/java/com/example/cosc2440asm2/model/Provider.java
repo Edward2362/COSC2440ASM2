@@ -13,6 +13,10 @@ public class Provider extends Stakeholder {
     public Provider() {
     }
 
+    public Provider(String nName){
+        this.setName(nName);
+    }
+
     public int getId() {
         return id;
     }

@@ -14,6 +14,10 @@ public class Customer extends Stakeholder {
     public Customer() {
     }
 
+    public Customer(String nName){
+        this.setName(nName);
+    }
+
     public int getId() {
         return id;
     }

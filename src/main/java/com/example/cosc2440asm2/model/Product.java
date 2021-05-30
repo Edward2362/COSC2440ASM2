@@ -37,8 +37,9 @@ public class Product {
     public Product() {
     }
 
-    public Product(String nName){
+    public Product(String nName, Category nCategory){
         this.name = nName;
+        this.setCategoryId(nCategory);
     }
 
     public int getId() {

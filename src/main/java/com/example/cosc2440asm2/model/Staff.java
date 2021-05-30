@@ -29,6 +29,10 @@ public class Staff {
 
     public Staff(){};
 
+    public Staff(String nName){
+        this.name = nName;
+    }
+
     public int getId() {
         return id;
     }
