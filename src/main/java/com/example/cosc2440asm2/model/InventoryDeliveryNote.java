@@ -26,6 +26,15 @@ public class InventoryDeliveryNote extends Note {
     public InventoryDeliveryNote() {
     }
 
+    public InventoryDeliveryNote(List<DeliveryDetail> deliveryDetailList) {
+        this.deliveryDetailList = deliveryDetailList;
+    }
+
+    public InventoryDeliveryNote(Date date, List<DeliveryDetail> deliveryDetailList) {
+        super(date);
+        this.deliveryDetailList = deliveryDetailList;
+    }
+
     public int getId() {
         return id;
     }

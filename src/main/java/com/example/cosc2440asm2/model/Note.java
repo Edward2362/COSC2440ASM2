@@ -24,8 +24,10 @@ public abstract class Note {
     public Note() {
     }
 
-    public Note(Date date) {
+
+    public Note(Date date, Staff staffID) {
         this.date = date;
+        this.staffID = staffID;
     }
 
     public Date getDate() {

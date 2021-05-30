@@ -31,7 +31,6 @@ public class RevenueService {
                         "\twhere c.id = :id"
         );
         query.setParameter("id", id);
-
         return query.list();
     }
 

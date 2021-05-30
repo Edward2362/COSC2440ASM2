@@ -30,6 +30,21 @@ public class SaleInvoice extends Note {
 
     public SaleInvoice(){};
 
+    public SaleInvoice(List<SaleDetail> saleDetailList) {
+        this.saleDetailList = saleDetailList;
+    }
+
+    public SaleInvoice(Date date, List<SaleDetail> saleDetailList) {
+        super(date);
+        this.saleDetailList = saleDetailList;
+    }
+
+    public SaleInvoice(Date date, Staff staffID, Customer customerID, List<SaleDetail> saleDetailList) {
+        super(date, staffID);
+        this.customerID = customerID;
+        this.saleDetailList = saleDetailList;
+    }
+
     public int getId() {
         return id;
     }
